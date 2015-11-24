@@ -11,7 +11,7 @@
 #import "FWTFormCell.h"
 #import "FWTPlaceholder.h"
 #import "FWTSubtitle.h"
-#include "FWTTitle.h"
+#import "FWTTitle.h"
 
 @interface FWTNameAndValueCell : FWTTextInputCell <FWTPlaceholder, FWTSubtitle, FWTTitle>
 
