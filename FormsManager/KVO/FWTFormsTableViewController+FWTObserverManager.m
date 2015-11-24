@@ -16,8 +16,10 @@
 
 -(void) observer:(FWTKVO *)observer didRecieveValueChange:(NSDictionary *)change
 {
-    if ([self.observerDelegate conformsToProtocol:@protocol(FWTObserverDelegate)]) {
-        [self.observerDelegate observeValueForKeyPath:observer.keyPath ofObject:observer.subject change:change];
+    id observerDelegate = self.observerDelegate;
+    
+    if ([observerDelegate conformsToProtocol:@protocol(FWTObserverDelegate)]) {
+        [observerDelegate observeValueForKeyPath:observer.keyPath ofObject:observer.subject change:change];
     }
 }
 
