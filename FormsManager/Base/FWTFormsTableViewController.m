@@ -94,11 +94,13 @@
 
 -(void)setFormDescriptionDataSource:(id<FWTFormDescriptionProtocol>) formDescriptionDataSource
 {
+    NSAssert(self.formDescriptionKey, @"formDescriptionKey must be set before setDescriptionDataSource");
+    
     if (self->_formDescriptionDataSource != formDescriptionDataSource) {
         self->_formDescriptionDataSource = formDescriptionDataSource;
     
         if ([self conformsToProtocol:@protocol(FWTFormDescriptionKeyProtocol)]) {
-            NSDictionary *cellsConfigurationDictionary = [self.formDescriptionDataSource formDescriptionForKey:[self formDescriptionKey]];
+            NSDictionary *cellsConfigurationDictionary = [self.formDescriptionDataSource formDescriptionForKey:self.formDescriptionKey];
             self.appearanceManager = [[FWTFormAppearanceManager alloc] initWithTableView:self.tableView formConfigurationDictionary:cellsConfigurationDictionary];
             self.appearanceManager.dynamicFormDataSource = self;
         }
@@ -122,13 +124,6 @@
     return _textFieldResponders;
 }
 
-
-#pragma mark - FWTFormDescriptionKeyProtocol
-
--(NSString *) formDescriptionKey
-{
-    return self.formDescriptionKey;
-}
 
 #pragma mark - Delegates
 #pragma mark
