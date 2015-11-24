@@ -177,6 +177,9 @@
     return sectionHeader;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wselector"
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -205,6 +208,9 @@
     
     return cell;
 }
+#pragma clang diagnostic pop
+
+
 
 #pragma mark - UITableViewDelegate
 
