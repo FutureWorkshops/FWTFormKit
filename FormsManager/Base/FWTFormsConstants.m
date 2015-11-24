@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#include "FWTFormsConstants.h"
+#import "FWTFormsConstants.h"
 
 NSString * const FWTItemCellIdentifier = @"FWTItemCellIdentifier";
 NSString * const FWTItemTitle = @"FWTItemTitle";
