@@ -93,18 +93,24 @@
 }
 
 
-+(instancetype) numberFormatterWithYearSymbol
++(instancetype) numberFormatterWithCustomSymbol:(NSString *) symbol
 {
     static NSNumberFormatter *_numberFormatter;
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
         _numberFormatter = [[self class] _numberFormatterWithPercantageFormatterBehaviour];;
-        _numberFormatter.percentSymbol = @" YEARS";
         
     });
     
+     _numberFormatter.percentSymbol = symbol;
+    
     return _numberFormatter;
+}
+
++(instancetype) numberFormatterWithYearSymbol
+{
+    return [self numberFormatterWithCustomSymbol:@" YEARS"];
 }
 
 + (instancetype) _numberFormatterWithPercantageFormatterBehaviour
@@ -114,9 +120,10 @@
     _numberFormatter = [[NSNumberFormatter alloc] init];
     [_numberFormatter setNumberStyle: NSNumberFormatterPercentStyle];
     _numberFormatter.maximumFractionDigits = 0;
+    _numberFormatter.usesGroupingSeparator = NO;
     [_numberFormatter setGeneratesDecimalNumbers:NO];
     _numberFormatter.multiplier = @1;
-    _numberFormatter.maximum = @100;
+    _numberFormatter.maximum = @10000;
    
     return _numberFormatter;
 }
