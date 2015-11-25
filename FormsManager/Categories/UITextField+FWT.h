@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FWTTextFieldInputError.h"
+#import "FWTTextFieldEnablerProtocol.h"
+
 
 @interface UITextField (FWT)
+
+- (void) setTextFieldInputErrorDelegate:(id <FWTTextFieldInputError>) delegate;
+- (void) setTextFieldEnablerDelegate:(id <FWTTextFieldEnablerProtocol>) delegate;
+
 
 -(void) inputError;
 -(void) disable;

@@ -8,8 +8,6 @@
 
 #import "UITextField+FWT.h"
 #import <objc/runtime.h>
-#import "FWTTextFieldInputError.h"
-#import "FWTTextFieldEnablerProtocol.h"
 
 NSString * const FWTTextFieldInputErrorDelegate = @"FWTTextFieldInputErrorDelegate";
 NSString * const FWTTextFieldEnablerDelegate = @"FWTTextFieldEnablerDelegate";
@@ -55,6 +53,8 @@ NSString * const FWTTextFieldEnablerDelegate = @"FWTTextFieldEnablerDelegate";
 }
 
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wselector"
 -(void) inputError
 {
     id textFieldInpurErrorDelegate = [self textFieldInputErrorDelegate];
@@ -80,5 +80,7 @@ NSString * const FWTTextFieldEnablerDelegate = @"FWTTextFieldEnablerDelegate";
         [textFieldEnablerDelegate performSelector:@selector(setEnableTextField:) withObject:self];
     }
 }
+
+#pragma clang diagnostic pop
 
 @end
