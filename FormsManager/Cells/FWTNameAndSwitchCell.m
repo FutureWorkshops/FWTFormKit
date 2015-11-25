@@ -32,4 +32,10 @@
     self.switchSelectorState = [NSNumber numberWithBool:sender.on];
 }
 
+
+-(void)setTitle:(NSString *)title
+{
+    self.titleLabel.text = title;
+}
+
 @end
