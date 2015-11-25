@@ -41,7 +41,13 @@
     NSUInteger minimumTextLenght;
             
     meaningNumberRange  = range;
-    meaningNumberRange.location = range.location - self.inputFormatter.percentSymbol.length;
+    NSInteger location = range.location - self.inputFormatter.percentSymbol.length;
+    if (location < 0) {
+        location = 0;
+        string = self.inputFormatter.percentSymbol;
+    }
+    
+    meaningNumberRange.location = location;
     minimumTextLenght = self.inputFormatter.percentSymbol.length;
     
     NSString *replaced = [string stringByReplacingCharactersInRange:meaningNumberRange withString:character];
