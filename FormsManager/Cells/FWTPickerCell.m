@@ -28,6 +28,7 @@
 - (void)setSelectedIndex:(NSInteger)selectedIndex
 {
     if (self.selectedIndex != selectedIndex) {
+        self->_selectedIndex = selectedIndex;
         [self.pickerview selectRow:selectedIndex inComponent:0 animated:YES];
     }
 }
