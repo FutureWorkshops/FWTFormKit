@@ -18,7 +18,7 @@
 #import "FWTAccessoryView.h"
 #import "FWTTitle.h"
 #import "FWTSubtitle.h"
-
+#import "FWTNameAndSwitchCell.h"
 
 #define kDefaultHeightForHeaderView 60.0
 #define kDefaultHeightForFooterView 60.0
@@ -57,7 +57,7 @@
 
 - (instancetype)initWithFormDescription:(id<FWTFormDescriptionProtocol>)formDescriptionDataSource
 {
-    self = [super initWithStyle:UITableViewStyleGrouped];
+    self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
         self.formDescriptionDataSource = formDescriptionDataSource;
     }
@@ -349,7 +349,12 @@
     {
         return @[@"textField.text"];
     }
-
+    
+    if ([cell isKindOfClass:[FWTNameAndSwitchCell class]])
+    {
+        return @[@"switchSelectorState"];
+    }
+    
     return nil;
 }
 
