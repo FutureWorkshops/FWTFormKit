@@ -13,11 +13,8 @@
 
 @interface UITextField (FWT)
 
-- (void) setTextFieldInputErrorDelegate:(id <FWTTextFieldInputError>) delegate;
 - (void) setTextFieldEnablerDelegate:(id <FWTTextFieldEnablerProtocol>) delegate;
 
-
--(void) inputError;
 -(void) disable;
 -(void) enable;
 

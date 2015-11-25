@@ -10,7 +10,7 @@
 
 @protocol FWTTextFieldInputError <NSObject>
 
--(void) inputErrorInTextField:(UITextField *) textField;
+-(void) cell:(id) sender generateInputErrorInTextField:(UITextField *) textField;
 
 
 @end

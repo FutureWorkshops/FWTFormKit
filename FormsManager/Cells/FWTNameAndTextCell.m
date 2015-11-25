@@ -48,7 +48,7 @@
     if (replaced.length < 50) {
         return YES;
     }
-    [textField inputError];
+    [self.inputErrorDelegate cell:self generateInputErrorInTextField:textField];
     
     return NO;
 }

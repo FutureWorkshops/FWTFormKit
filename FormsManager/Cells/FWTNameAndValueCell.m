@@ -47,7 +47,7 @@
             if ([self.validator validateText:replaced]) {
                 self.valueTextField.text = [self.validator validatedString];
             } else {
-                [textField inputError];
+                [self.inputErrorDelegate cell:self generateInputErrorInTextField:textField];
             };
 
             return NO;
@@ -57,8 +57,7 @@
                 self.valueTextField.text = [self.validator validatedString];
             } else
             {
-                [textField inputError];
-               
+                [self.inputErrorDelegate cell:self generateInputErrorInTextField:textField];    
             }
              return NO;
         }

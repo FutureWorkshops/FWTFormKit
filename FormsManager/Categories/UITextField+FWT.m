@@ -16,25 +16,6 @@ NSString * const FWTTextFieldEnablerDelegate = @"FWTTextFieldEnablerDelegate";
 @implementation UITextField (FWT)
 
 
-- (void)setTextFieldInputErrorDelegate:(id <FWTTextFieldInputError>) delegate
-{
-    objc_setAssociatedObject(self, &FWTTextFieldInputErrorDelegate, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (id <FWTTextFieldInputError> ) textFieldInputErrorDelegate
-{
-    id textFieldInputError = objc_getAssociatedObject(self, &FWTTextFieldInputErrorDelegate);
-    
-    if (textFieldInputError) {
-        return textFieldInputError;
-    }
-    
-    else {
-        return nil;
-    }
-}
-
-
 - (void) setTextFieldEnablerDelegate:(id <FWTTextFieldEnablerProtocol>) delegate
 {
     objc_setAssociatedObject(self, &FWTTextFieldEnablerDelegate, delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -55,14 +36,6 @@ NSString * const FWTTextFieldEnablerDelegate = @"FWTTextFieldEnablerDelegate";
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wselector"
--(void) inputError
-{
-    id textFieldInpurErrorDelegate = [self textFieldInputErrorDelegate];
-    if ([textFieldInpurErrorDelegate conformsToProtocol:@protocol(FWTTextFieldInputError)]) {
-        [textFieldInpurErrorDelegate performSelector:@selector(inputErrorInTextField:) withObject:self];
-    }
-
-}
 
 -(void) disable
 {
