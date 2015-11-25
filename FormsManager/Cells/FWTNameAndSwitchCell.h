@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FWTFormCell.h"
 
-@interface FWTNameAndSwitchCell : UITableViewCell
+@interface FWTNameAndSwitchCell : FWTFormCell
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UISwitch *switchSelector;
