@@ -50,6 +50,7 @@
                 [textField inputError];
             };
 
+            return NO;
         } else if ([self.validator respondsToSelector:@selector(validateText:withReplacedCharacter:inRange:)])
         {
             if ([self.validator validateText:textField.text withReplacedCharacter:string inRange:range]) {
@@ -57,11 +58,13 @@
             } else
             {
                 [textField inputError];
+               
             }
+             return NO;
         }
     }
     
-    return NO;
+    return YES;
 }
 
 
