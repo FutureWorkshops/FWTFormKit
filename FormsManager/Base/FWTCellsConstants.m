@@ -13,4 +13,4 @@ NSString * const FWTNameAndTextRow = @"FWTNameAndTextCell";
 NSString * const FWTNameAndValueRow = @"FWTNameAndValueCell";
 NSString * const FWTPickerRow = @"FWTPickerCell";
 NSString * const FWTValuePickerRow =@"FWTValuePickerCell";
-
+NSString * const FWTNameAndSwitchRow = @"FWTNameAndSwitchCell";
