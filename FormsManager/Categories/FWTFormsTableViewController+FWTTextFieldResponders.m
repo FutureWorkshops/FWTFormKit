@@ -33,14 +33,15 @@
     UITableViewCell *nextResponderCell = nil;
     UITextField *nextResponderTextField=nil;
     
-    if ([self.tableView cellForRowAtIndexPath:nextResponderIndexPath]) {
-        [self.tableView scrollToRowAtIndexPath:nextResponderIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-        nextResponderCell = [self.tableView cellForRowAtIndexPath:nextResponderIndexPath];
-        nextResponderTextField = (UITextField *)[nextResponderCell viewWithTag:[[nextResponderDictionary objectForKey:nextResponderIndexPath] integerValue]];
+    nextResponderCell = [self.tableView cellForRowAtIndexPath:nextResponderIndexPath];
+    
+    if (nextResponderCell) {
+        if ([nextResponderCell conformsToProtocol:@protocol(FWTTextFieldResponderProtocol)]) {
+            [self.tableView scrollToRowAtIndexPath:nextResponderIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+            nextResponderTextField = (UITextField *)[nextResponderCell viewWithTag:[[nextResponderDictionary objectForKey:nextResponderIndexPath] integerValue]];
+            [nextResponderTextField becomeFirstResponder];
+        }
     }
-    
-    [nextResponderTextField becomeFirstResponder];
-    
 }
 
 -(BOOL) haveNextResponderTextFieldWithTag:(NSUInteger) textViewTag inCell:(UITableViewCell *) cell
