@@ -44,7 +44,7 @@
     if (replacedAmount == nil) {
         //Probably non numeric character OR all meaningful digits were deleted.
         if (value.length < minimumTextLenght + 1) {
-            self.validatedString = [self.inputFormatter stringFromNumber:@0];
+            self.validatedString = nil; //[self.inputFormatter stringFromNumber:@0];
             return YES;
         }
         return NO;
