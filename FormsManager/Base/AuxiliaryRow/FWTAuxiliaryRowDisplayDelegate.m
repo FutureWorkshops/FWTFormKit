@@ -68,8 +68,10 @@
     }
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+
     [self.tableView endUpdates];
+    
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     
 }
 
@@ -113,6 +115,7 @@
         
         [self.tableView insertRowsAtIndexPaths:auxiliaryRowTableViewIndexPaths
                               withRowAnimation:UITableViewRowAnimationFade];
+
     }
     
     [self.tableView endUpdates];
