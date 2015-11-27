@@ -20,8 +20,10 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    self.contentView.bounds = CGRectMake(self.contentView.bounds.origin.x, self.contentView.bounds.origin.y, self.contentView.bounds.size.width - self.contentMargin * 2.0, self.contentView.bounds.size.height);
+    self.contentView.bounds = CGRectMake(self.contentView.bounds.origin.x, self.contentView.bounds.origin.y, self.contentView.bounds.size.width - self.contentMargin * 2.0f, self.contentView.bounds.size.height);
+
 }
+
 
 -(void) setContentMargin:(CGFloat) margin
 {

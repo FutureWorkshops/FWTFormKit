@@ -7,7 +7,7 @@
 //
 
 
-#define FWTHeaderMargin 20.0
+#define FWTHeaderMargin 20.0f
 #import "FWTSectionHeaderView.h"
 
 
