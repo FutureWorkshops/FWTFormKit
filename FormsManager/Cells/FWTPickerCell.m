@@ -11,6 +11,11 @@
 
 @interface FWTPickerCell () <UIPickerViewDataSource, UIPickerViewDelegate>
 
+@property (nonatomic) UIColor *titleColor;
+@property (nonatomic) UIFont *titleFont;
+
+@property (nonatomic) UIColor *complimentryBackGroundColor;
+
 @end
 
 @implementation FWTPickerCell
@@ -41,6 +46,17 @@
     }
 }
 
+-(void)setTitleLableColor:(UIColor *)color font:(UIFont *)font
+{
+    self.titleColor = color;
+    self.titleFont = font;
+}
+
+-(void) setComplimentaryBackGroundColor:(UIColor *)complimentaryColor
+{
+    self.complimentryBackGroundColor = complimentaryColor;
+}
+
 #pragma mark - UIPickerViewDataSource
 
 -(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
@@ -62,8 +78,9 @@
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, pickerView.bounds.size.width, 43)];
     label.textAlignment = NSTextAlignmentCenter;
-    label.backgroundColor = [UIColor whiteColor];
-    label.font = [UIFont customRegularTextFontWithSize:15];
+    label.backgroundColor = self.complimentryBackGroundColor ? self.complimentryBackGroundColor : self.contentView.backgroundColor;
+    label.textColor = self.titleColor ? self.titleColor : [UIColor blackColor];
+    label.font = self.titleFont ? self.titleFont : [UIFont systemFontOfSize:14.0f];
     if (self.startDate != NSNotFound) {
         label.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.startDate + row];
     } else

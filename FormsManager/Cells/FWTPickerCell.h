@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "FWTFormCell.h"
+#import "FWTCellAppearanceProtocol.h"
 
 @interface FWTPickerCell : FWTFormCell
 
