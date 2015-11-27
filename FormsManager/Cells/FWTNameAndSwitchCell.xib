@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,57 +14,41 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5p-RY-BPQ">
-                        <rect key="frame" x="20" y="18" width="223" height="18"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WVV-gm-10p">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
+                        <subviews>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8Uc-cx-YCN">
+                                <rect key="frame" x="251" y="11" width="51" height="31"/>
+                                <animations/>
+                                <color key="onTintColor" red="0.72156862749999995" green="0.99607843139999996" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5p-RY-BPQ">
+                                <rect key="frame" x="20" y="18" width="214" height="18"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="15"/>
+                                <color key="textColor" red="0.33333333333333331" green="0.43529411764705883" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <animations/>
-                        <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="15"/>
-                        <color key="textColor" red="0.33333333333333331" green="0.43529411764705883" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8Uc-cx-YCN">
-                        <rect key="frame" x="251" y="11" width="51" height="31"/>
-                        <animations/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="49" id="9Kn-eq-wW8"/>
-                            <constraint firstAttribute="height" constant="31" id="i6b-YZ-RRf"/>
+                            <constraint firstItem="U5p-RY-BPQ" firstAttribute="leading" secondItem="WVV-gm-10p" secondAttribute="leading" constant="20" id="5dM-bS-ryn"/>
+                            <constraint firstItem="8Uc-cx-YCN" firstAttribute="leading" secondItem="U5p-RY-BPQ" secondAttribute="trailing" constant="17" id="AnQ-1L-sLR"/>
+                            <constraint firstAttribute="bottom" secondItem="U5p-RY-BPQ" secondAttribute="bottom" constant="17" id="HlR-ox-RfH"/>
+                            <constraint firstItem="8Uc-cx-YCN" firstAttribute="centerY" secondItem="WVV-gm-10p" secondAttribute="centerY" id="hBF-HY-Cyx"/>
+                            <constraint firstItem="U5p-RY-BPQ" firstAttribute="top" secondItem="WVV-gm-10p" secondAttribute="top" constant="18" id="s9a-lM-U8d"/>
+                            <constraint firstAttribute="trailing" secondItem="8Uc-cx-YCN" secondAttribute="trailing" constant="20" id="sDC-yB-Xpx"/>
                         </constraints>
-                        <color key="onTintColor" red="0.72156862749999995" green="0.99607843139999996" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="9Kn-eq-wW8"/>
-                                <exclude reference="i6b-YZ-RRf"/>
-                            </mask>
-                        </variation>
-                    </switch>
+                    </view>
                 </subviews>
                 <animations/>
                 <constraints>
-                    <constraint firstItem="8Uc-cx-YCN" firstAttribute="leading" secondItem="U5p-RY-BPQ" secondAttribute="trailing" constant="8" id="1ui-11-2cV"/>
-                    <constraint firstItem="U5p-RY-BPQ" firstAttribute="leading" secondItem="RAB-Y3-NIB" secondAttribute="leading" constant="20" id="2Ob-xQ-aDn"/>
-                    <constraint firstAttribute="trailing" secondItem="8Uc-cx-YCN" secondAttribute="trailing" constant="20" id="BEG-kE-QsI"/>
-                    <constraint firstAttribute="bottom" secondItem="8Uc-cx-YCN" secondAttribute="bottom" constant="11" id="Icc-bF-ltO"/>
-                    <constraint firstAttribute="trailing" secondItem="8Uc-cx-YCN" secondAttribute="trailing" constant="20" id="Jyg-IO-TRB"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="U5p-RY-BPQ" secondAttribute="bottom" constant="9" id="Mwl-sO-Zz0"/>
-                    <constraint firstItem="U5p-RY-BPQ" firstAttribute="leading" secondItem="RAB-Y3-NIB" secondAttribute="leadingMargin" constant="10" id="Nal-GO-Wlc"/>
-                    <constraint firstItem="8Uc-cx-YCN" firstAttribute="leading" secondItem="U5p-RY-BPQ" secondAttribute="trailing" constant="8" id="YQV-Ea-vKc"/>
-                    <constraint firstAttribute="bottom" secondItem="U5p-RY-BPQ" secondAttribute="bottom" constant="17" id="b3J-Xg-ngo"/>
-                    <constraint firstAttribute="bottom" secondItem="8Uc-cx-YCN" secondAttribute="bottom" constant="11" id="d5f-fz-eLr"/>
-                    <constraint firstItem="8Uc-cx-YCN" firstAttribute="top" secondItem="RAB-Y3-NIB" secondAttribute="top" constant="11" id="dpk-Zd-3r4"/>
-                    <constraint firstItem="U5p-RY-BPQ" firstAttribute="top" secondItem="RAB-Y3-NIB" secondAttribute="top" constant="18" id="khy-TV-ths"/>
-                    <constraint firstItem="8Uc-cx-YCN" firstAttribute="top" secondItem="RAB-Y3-NIB" secondAttribute="top" constant="11" id="qxU-nz-bxF"/>
-                    <constraint firstItem="U5p-RY-BPQ" firstAttribute="top" secondItem="RAB-Y3-NIB" secondAttribute="topMargin" constant="10" id="yXx-VQ-7bK"/>
+                    <constraint firstAttribute="trailing" secondItem="WVV-gm-10p" secondAttribute="trailing" id="23q-4B-mpe"/>
+                    <constraint firstAttribute="bottom" secondItem="WVV-gm-10p" secondAttribute="bottom" id="PGq-Gj-31t"/>
+                    <constraint firstItem="WVV-gm-10p" firstAttribute="leading" secondItem="RAB-Y3-NIB" secondAttribute="leading" id="Spv-Wi-wrZ"/>
+                    <constraint firstItem="WVV-gm-10p" firstAttribute="top" secondItem="RAB-Y3-NIB" secondAttribute="top" id="zpQ-wZ-kd4"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="Mwl-sO-Zz0"/>
-                        <exclude reference="Nal-GO-Wlc"/>
-                        <exclude reference="yXx-VQ-7bK"/>
-                        <exclude reference="BEG-kE-QsI"/>
-                        <exclude reference="Icc-bF-ltO"/>
-                        <exclude reference="YQV-Ea-vKc"/>
-                        <exclude reference="qxU-nz-bxF"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <animations/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>

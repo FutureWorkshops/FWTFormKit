@@ -26,7 +26,6 @@
     self.startDate = NSNotFound;
 }
 
-
 #pragma mark - Public
 #pragma mark
 
@@ -52,7 +51,7 @@
     self.titleFont = font;
 }
 
--(void) setComplimentaryBackGroundColor:(UIColor *)complimentaryColor
+-(void) setComplimentaryBackgroundColor:(UIColor *)complimentaryColor
 {
     self.complimentryBackGroundColor = complimentaryColor;
 }

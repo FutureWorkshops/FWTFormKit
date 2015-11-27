@@ -11,6 +11,7 @@
 @interface FWTFormCell ()
 
 @property (nonatomic, readwrite) CGFloat contentMargin;
+@property (strong, nonatomic) IBOutlet UIView *innerContentView;
 
 @end
 
@@ -20,10 +21,13 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    self.contentView.bounds = CGRectMake(self.contentView.bounds.origin.x, self.contentView.bounds.origin.y, self.contentView.bounds.size.width - self.contentMargin * 2.0f, self.contentView.bounds.size.height);
-
+    
+    for (NSLayoutConstraint *constrain in self.contentView.constraints) {
+        if (constrain.firstAttribute == NSLayoutAttributeTrailing || constrain.firstAttribute == NSLayoutAttributeLeading) {
+            constrain.constant = self.contentMargin;
+        }
+    }
 }
-
 
 -(void) setContentMargin:(CGFloat) margin
 {
@@ -37,6 +41,7 @@
 {
     self.backgroundColor = backgroundColor;
     self.contentView.backgroundColor = backgroundColor;
+
 }
 
 
