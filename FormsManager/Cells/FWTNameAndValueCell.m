@@ -36,6 +36,18 @@
     self.titleLable.text = title;
 }
 
+-(void)setTitleLableColor:(UIColor *)color font:(UIFont *)font
+{
+    self.titleLable.textColor = color;
+    self.titleLable.font = font;
+}
+
+-(void)setSubtitleColor:(UIColor *) color font:(UIFont *)font
+{
+    self.subtitleLabel.textColor = color;
+    self.subtitleLabel.font = font;
+}
+
 #pragma mark - textfieldDelegate
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

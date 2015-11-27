@@ -10,7 +10,11 @@
 
 @protocol FWTCellAppearanceProtocol <NSObject>
 
+@optional
 -(void) setContentMargin:(CGFloat) margin;
 -(void) setCellBackgroundColor:(UIColor *) color;
+-(void) setComplimentaryBackGroundColor:(UIColor *) complimentaryColor;
+-(void) setTitleLableColor:(UIColor *) color font:(UIFont *) font;
+-(void) setSubtitleColor:(UIColor *) colot font:(UIFont *) font;
 
 @end
