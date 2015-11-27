@@ -147,13 +147,14 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return kDefaultHeightForHeaderView;
+    return [self tableView:tableView viewForHeaderInSection:section].frame.size.height;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     return [[UIView alloc] initWithFrame:CGRectZero];
 }
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
@@ -164,7 +165,7 @@
 {
     NSAttributedString *headerText = [self attributedTextForHeaderInSection:section];
     if (!headerText) {
-        return nil;
+        return [[UIView alloc] initWithFrame:CGRectZero];
     }
     
     FWTSectionHeaderView *sectionHeader = [[FWTSectionHeaderView alloc] initWithFrame:self.tableView.frame attributedString:headerText];
