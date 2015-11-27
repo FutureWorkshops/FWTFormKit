@@ -38,40 +38,50 @@
 
 -(void) displayInlineAuxiliaryRowForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.tableView beginUpdates];
     
-    BOOL before = NO;   // indicates if the AuxiliaryRow is below "indexPath", help us determine which row to reveal
-    if ([self _hasInlineAuxiliaryRow])
-    {
-        before = self.opendAuxiliaryRowIndexPath.row < indexPath.row;
-    }
-    
-    BOOL sameCellClicked = (self.opendAuxiliaryRowIndexPath.row - 1 == indexPath.row);
-    
-    if ([self _hasInlineAuxiliaryRow])
-    {
-        NSIndexPath *auxiliaryRowIndexPath = [NSIndexPath indexPathForRow:self.opendAuxiliaryRowIndexPath.row inSection:self.opendAuxiliaryRowIndexPath.section];
-        FWTCellConfiguration *cellConfiguration  = [self.appearanceManager visibleCellConfigurationForIndexPath:auxiliaryRowIndexPath];
-        [self.appearanceManager hide:YES formRowAtIndexPath:cellConfiguration.indexPath];
-        [self.tableView deleteRowsAtIndexPaths:@[auxiliaryRowIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-        self.opendAuxiliaryRowIndexPath = nil;
-    }
-    
-    if (!sameCellClicked)
-    {
-        // hide the old date picker and display the new one
-        NSInteger rowToReveal = (before ? indexPath.row - 1 : indexPath.row);
-        NSIndexPath *indexPathToReveal = [NSIndexPath indexPathForRow:rowToReveal inSection:0];
+    [UIView animateWithDuration:0.7f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.tableView beginUpdates];
         
-        [self _toggleAuxiliaryRowWithAtIndexPath:indexPathToReveal];
-        self.opendAuxiliaryRowIndexPath = [NSIndexPath indexPathForRow:indexPathToReveal.row + 1 inSection:0];
-    }
+        BOOL before = NO;   // indicates if the AuxiliaryRow is below "indexPath", help us determine which row to reveal
+        if ([self _hasInlineAuxiliaryRow])
+        {
+            before = self.opendAuxiliaryRowIndexPath.row < indexPath.row;
+        }
+        
+        BOOL sameCellClicked = (self.opendAuxiliaryRowIndexPath.row - 1 == indexPath.row);
+        
+        if ([self _hasInlineAuxiliaryRow])
+        {
+            NSIndexPath *auxiliaryRowIndexPath = [NSIndexPath indexPathForRow:self.opendAuxiliaryRowIndexPath.row inSection:self.opendAuxiliaryRowIndexPath.section];
+            FWTCellConfiguration *cellConfiguration  = [self.appearanceManager visibleCellConfigurationForIndexPath:auxiliaryRowIndexPath];
+            [self.appearanceManager hide:YES formRowAtIndexPath:cellConfiguration.indexPath];
+            [self.tableView deleteRowsAtIndexPaths:@[auxiliaryRowIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            self.opendAuxiliaryRowIndexPath = nil;
+        }
+        
+        if (!sameCellClicked)
+        {
+            // hide the old date picker and display the new one
+            NSInteger rowToReveal = (before ? indexPath.row - 1 : indexPath.row);
+            NSIndexPath *indexPathToReveal = [NSIndexPath indexPathForRow:rowToReveal inSection:0];
+            
+            
+            [self _toggleAuxiliaryRowWithAtIndexPath:indexPathToReveal];
+            self.opendAuxiliaryRowIndexPath = [NSIndexPath indexPathForRow:indexPathToReveal.row + 1 inSection:0];
+            
+            
+        }
+        [self.tableView endUpdates];
+        
+    } completion:^(BOOL finished) {
+        if (self.opendAuxiliaryRowIndexPath) {
+            [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+        }
+    }];
+    
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-    [self.tableView endUpdates];
     
-    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     
 }
 
@@ -97,8 +107,6 @@
 -(void) _toggleAuxiliaryRowWithAtIndexPath:(NSIndexPath *) indexPath
 {
     
-    [self.tableView beginUpdates];
-    
     NSArray *auxiliaryRowTableViewIndexPaths = @[[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section]];
     FWTCellConfiguration *cellConfiguration  = [self.appearanceManager visibleCellConfigurationForIndexPath:indexPath];
     NSArray *auxiliaryRowFormDescriptionIndexPaths =@[[NSIndexPath indexPathForRow:cellConfiguration.indexPath.row + 1 inSection:cellConfiguration.indexPath.section]];
@@ -117,8 +125,6 @@
                               withRowAnimation:UITableViewRowAnimationFade];
 
     }
-    
-    [self.tableView endUpdates];
 }
 
 
