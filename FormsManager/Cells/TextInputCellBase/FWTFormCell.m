@@ -24,6 +24,7 @@
     
     for (NSLayoutConstraint *constrain in self.contentView.constraints) {
         if (constrain.firstAttribute == NSLayoutAttributeTrailing || constrain.firstAttribute == NSLayoutAttributeLeading) {
+            if (constrain.constant == self.contentMargin) return;
             constrain.constant = self.contentMargin;
         }
     }
