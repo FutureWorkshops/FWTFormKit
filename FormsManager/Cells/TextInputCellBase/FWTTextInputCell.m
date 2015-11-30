@@ -31,14 +31,7 @@
     textField.returnKeyType = UIReturnKeyNext;
     
     if ([self.textFieldInputDelegate conformsToProtocol:@protocol(FWTTextFieldInputDelegate)]) {
-        [self.textFieldInputDelegate fwt_textFieldBeginEditing:textField];
-    }
-}
-
--(void)textFieldDidEndEditing:(UITextField *)textField
-{
-    if ([self.textFieldInputDelegate conformsToProtocol:@protocol(FWTTextFieldInputDelegate)]) {
-        [self.textFieldInputDelegate fwt_textFieldEndEditing:textField];
+        [self.textFieldInputDelegate cell:self textFieldBeginEditing: textField];
     }
 }
 
