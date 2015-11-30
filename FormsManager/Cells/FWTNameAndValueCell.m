@@ -61,7 +61,7 @@
 
 -(void) setCellInputValidator:(id)validator
 {
-    
+    self.inputValidator = validator;
 }
 
 #pragma mark - textfieldDelegate
@@ -94,6 +94,17 @@
     return YES;
 }
 
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if ([self.inputValidator conformsToProtocol:@protocol(FWTValidationProtocol)]) {
+        if (![self.inputValidator isValidInputString:textField.text]) {
+            if ([self.inputErrorDelegate conformsToProtocol:@protocol(FWTTextFieldInputError)]) {
+                [self.inputErrorDelegate cell:self generateInputErrorInTextField:textField];
+            }
+        }
+    }
+}
 
 #pragma mark - FWTTextFieldResponderProtocol
 
