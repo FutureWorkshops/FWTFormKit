@@ -201,6 +201,9 @@
         [cell performSelector:@selector(setSubtitle:) withObject:cellConfiguration.itemSubtitle];
     }
     
+    if ([cell conformsToProtocol:@protocol(FWTInputValidatableCell)]) {
+        [cell performSelector:@selector(setInputValidator:) withObject:cellConfiguration.inputValidator];
+    }
     
     return cell;
 }
