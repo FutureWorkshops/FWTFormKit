@@ -15,6 +15,7 @@
 -(void) setCellBackgroundColor:(UIColor *) color;
 -(void) setComplimentaryBackgroundColor:(UIColor *) complimentaryColor;
 -(void) setTitleLableColor:(UIColor *) color font:(UIFont *) font;
+-(void) setTextFieldColor:(UIColor *) color font:(UIFont *) font;
 -(void) setSubtitleColor:(UIColor *) colot font:(UIFont *) font;
 
 @end
