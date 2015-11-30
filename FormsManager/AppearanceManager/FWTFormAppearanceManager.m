@@ -236,6 +236,15 @@
     if (cellDescription[FWTCellAccessoryViewImage]) {
         cell.accessoryViewImage = [UIImage imageNamed:cellDescription[FWTCellAccessoryViewImage]];
     }
+    
+    if (cellDescription[FWTCellInputFormatter]) {
+        cell.inputFormatter = cellDescription[FWTCellInputFormatter];
+    }
+    
+    if (cellDescription[FWTCellInputValidator]) {
+        cell.inputValidator = cellDescription[FWTCellInputValidator];
+    }
+    
     return cell;
 }
 

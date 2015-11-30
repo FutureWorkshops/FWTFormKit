@@ -22,6 +22,8 @@
 @property (nonatomic) UIImage *accessoryViewImage;;
 @property (nonatomic) BOOL isAuxiliaryRowActivator;
 @property (nonatomic) BOOL isObservable;
+@property (nonatomic) id inputFormatter;
+@property (nonatomic) id inputValidator;
 
 @property (nonatomic) NSIndexPath * indexPath;
 @property (nonatomic) BOOL hidden;

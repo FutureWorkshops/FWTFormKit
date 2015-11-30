@@ -34,6 +34,9 @@ FOUNDATION_EXPORT NSString * const FWTItemDataPropertyKey;
 FOUNDATION_EXPORT NSString * const FWTItemPlaceholderText;
 FOUNDATION_EXPORT NSString * const FWTCellAccessoryViewImage;
 FOUNDATION_EXPORT NSString * const FWTCellIsObservable;
+FOUNDATION_EXPORT NSString * const FWTCellInputFormatter;
+FOUNDATION_EXPORT NSString * const FWTCellInputValidator;
+
 
 
 

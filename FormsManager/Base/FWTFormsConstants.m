@@ -19,13 +19,16 @@ NSString * const FWTPresentViewControllerWithClassKey = @"FWTPresentViewControll
 NSString * const FWTCellIsHiddenKey = @"FWTCellIsHiddenKey";
 NSString * const FWTCellIsAuxiliaryRowActivator = @"FWTCellIsAuxiliaryRowActivator";
 NSString * const FWTCellIsObservable = @"FWTCellIsObservable";
+NSString * const FWTCellInputFormatter =@"FWTCellInputFormatter";
+NSString * const FWTCellInputValidator =@"FWTCellInputValidator";
 
 NSString * const FWTGroupsConfigurationKey = @"FWTGroupsConfigurationKey";
-
 NSString * const FWTCellsConfigurationKey = @"FWTCellsConfigurationKey";
 NSString * const FWTHeaderCellConfigurationKey = @"FWTHeaderCellConfigurationKey";
 NSString * const FWTFooterCellConfigurationKey = @"FWTFooterCellConfigurationKey";
 NSString * const FWTCellAccessoryViewImage = @"FWTCellAccessoryViewImage";
+
+
 
 // Dynamic Sections and Cells
 
