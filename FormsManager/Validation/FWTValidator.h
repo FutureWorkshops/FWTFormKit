@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FWTValidationProtocol.h"
 
-@interface FWTValidator : NSObject
+@interface FWTValidator : NSObject <FWTValidationProtocol>
+
+-(instancetype) initWithValidationRules:(NSArray *) validationRules numberFormatter:(NSNumberFormatter *)numberFormatter;
 
 @end

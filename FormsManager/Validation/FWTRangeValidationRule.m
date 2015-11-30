@@ -8,8 +8,6 @@
 
 #import "FWTRangeValidationRule.h"
 
-
-
 @interface FWTRangeValidationRule ()
 
 @property (nonatomic) NSNumber *minValue;
@@ -28,10 +26,16 @@
 }
 
 
--(BOOL) evaluateWithNumber:(NSNumber *) number
+-(BOOL) evaluateWithObject:(id)object
 {
-    return <#expression#>
+    if ([object respondsToSelector:@selector(compare:)] && [object isKindOfClass:[NSNumber class]]) {
     
+        NSComparisonResult leftOperandComparison = [object compare:self.minValue];
+        NSComparisonResult rightOperandComparison = [object compare:self.maxValue];
+        return ((leftOperandComparison== NSOrderedSame || leftOperandComparison == NSOrderedDescending) && (rightOperandComparison==NSOrderedSame || rightOperandComparison == NSOrderedAscending));
+    }
+    
+    return NO;
 }
 
 @end

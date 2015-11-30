@@ -7,11 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FWTValidationRule.h"
 
-@interface FWTRangeValidationRule : NSObject
-
+@interface FWTRangeValidationRule : NSObject <FWTValidationRule>
 
 +(instancetype) ruleWithMinValue:(NSNumber *) minValue maxValue:(NSNumber *) maxValue;
-
 
 @end

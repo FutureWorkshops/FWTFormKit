@@ -10,4 +10,7 @@
 
 @protocol FWTValidationProtocol <NSObject>
 
+-(BOOL) isValidInputString:(NSString *) string;
+
+
 @end
