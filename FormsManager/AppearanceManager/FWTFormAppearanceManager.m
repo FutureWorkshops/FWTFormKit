@@ -8,7 +8,7 @@
 //
 
 #import "FWTFormAppearanceManager.h"
-
+#import "FWTValidator.h"
 
 @interface FWTFormAppearanceManager ()
 
@@ -241,8 +241,10 @@
         cell.inputFormatter = cellDescription[FWTCellInputFormatter];
     }
     
-    if (cellDescription[FWTCellInputValidator]) {
-        cell.inputValidator = cellDescription[FWTCellInputValidator];
+    if (cellDescription[FWTCellInputValidationRules]) {
+        cell.validationRules = cellDescription[FWTCellInputValidationRules];
+        NSNumberFormatter *cellNumberFormatter = [cell.inputFormatter numberFormatter];
+        cell.inputValidator = [[FWTValidator alloc] initWithValidationRules:cell.validationRules numberFormatter:cellNumberFormatter];
     }
     
     return cell;

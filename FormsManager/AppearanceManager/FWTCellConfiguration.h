@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-
+#import "FWTInputFormatterWithNumberFormatterProtocol.h"
 @interface FWTCellConfiguration : NSObject
 
 @property (nonatomic) NSString *identifier;
@@ -22,8 +22,9 @@
 @property (nonatomic) UIImage *accessoryViewImage;;
 @property (nonatomic) BOOL isAuxiliaryRowActivator;
 @property (nonatomic) BOOL isObservable;
-@property (nonatomic) id inputFormatter;
+@property (nonatomic) id <FWTInputFormatterWithNumberFormatterProtocol> inputFormatter;
 @property (nonatomic) id inputValidator;
+@property (nonatomic) NSArray *validationRules;
 
 @property (nonatomic) NSIndexPath * indexPath;
 @property (nonatomic) BOOL hidden;
