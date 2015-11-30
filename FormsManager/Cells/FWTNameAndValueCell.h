@@ -12,15 +12,17 @@
 #import "FWTPlaceholder.h"
 #import "FWTSubtitle.h"
 #import "FWTTitle.h"
+#import "FWTInputFormattableCell.h"
+#import "FWTInputValidatableCell.h"
 #import "FWTTextFieldInputError.h"
 
-@interface FWTNameAndValueCell : FWTTextInputCell <FWTPlaceholder, FWTSubtitle, FWTTitle>
+@interface FWTNameAndValueCell : FWTTextInputCell <FWTPlaceholder, FWTSubtitle, FWTTitle, FWTInputFormattableCell, FWTInputValidatableCell>
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLable;
 @property (strong, nonatomic) IBOutlet UILabel *subtitleLabel;
 @property (strong, nonatomic) IBOutlet UITextField *valueTextField;
 
-@property (nonatomic) id <FWTStringFormatterProtocol> validator;
+@property (nonatomic) id <FWTStringFormatterProtocol> inputFormatter;
 @property (nonatomic) id <FWTTextFieldInputError> inputErrorDelegate;
 
 

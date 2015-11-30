@@ -12,8 +12,8 @@
 @protocol FWTValueFormatterProtocol <FWTInputFormatterWithNumberFormatterProtocol>
 
 @required
--(BOOL) validateValueString:(NSString *) string withAppendum:(NSNumber *)value;
--(BOOL) validateValueString:(NSString *) string withDeduction:(NSNumber *)value;
+-(BOOL) formatInputString:(NSString *) string withAppendum:(NSNumber *)value;
+-(BOOL) formatInputString:(NSString *) string withDeduction:(NSNumber *)value;
 
 
 @end

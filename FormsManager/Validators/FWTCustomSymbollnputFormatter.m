@@ -12,11 +12,8 @@
 
 @interface FWTCustomSymbollnputFormatter ()
 
-<<<<<<< HEAD
-@property (nonatomic) NSString *validatedString;
-=======
 @property (nonatomic) NSString *formattedString;
->>>>>>> Refactoring : rename all validators along with validators protocols into Formatters cos this is what they are actually do.
+
 @property (nonatomic) NSNumberFormatter *numberFormatter;
 
 @end
@@ -69,21 +66,13 @@
     if (replacedAmount == nil) {
         //Probably non numeric character OR all meaningful digits were deleted.
         if (replaced.length < minimumTextLenght + 1) {
-<<<<<<< HEAD
-            self.validatedString  = nil; //[self.inputFormatter stringFromNumber:@0];
-=======
             self.formattedString  = nil; //[self.inputFormatter stringFromNumber:@0];
->>>>>>> Refactoring : rename all validators along with validators protocols into Formatters cos this is what they are actually do.
+
             return YES;
         }
         return NO;
     }
-    
-<<<<<<< HEAD
-    self.validatedString  = [self.numberFormatter stringFromNumber:replacedAmount];
-=======
     self.formattedString  = [self.numberFormatter stringFromNumber:replacedAmount];
->>>>>>> Refactoring : rename all validators along with validators protocols into Formatters cos this is what they are actually do.
 
     return YES;
 }
@@ -91,11 +80,7 @@
 
 -(NSString *) formattedString
 {
-<<<<<<< HEAD
-    return _validatedString;
-=======
     return _formattedString;
->>>>>>> Refactoring : rename all validators along with validators protocols into Formatters cos this is what they are actually do.
 }
 
 

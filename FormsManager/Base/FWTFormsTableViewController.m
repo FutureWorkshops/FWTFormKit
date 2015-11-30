@@ -200,7 +200,7 @@
     if ([cell conformsToProtocol:@protocol(FWTSubtitle)]) {
         [cell performSelector:@selector(setSubtitle:) withObject:cellConfiguration.itemSubtitle];
     }
-
+    
     
     return cell;
 }

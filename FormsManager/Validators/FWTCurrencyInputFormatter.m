@@ -12,7 +12,7 @@
 
 @interface FWTCurrencyInputFormatter ()
 
-@property (nonatomic) NSString *validatedString;
+@property (nonatomic) NSString *formattedString;
 
 @end
 
@@ -51,17 +51,17 @@
     if (replacedAmount == nil) {
         //Probably non numeric character OR all meaningful digits were deleted.
         if (value.length < minimumTextLenght + 1) {
-            self.validatedString = nil; //[self.inputFormatter stringFromNumber:@0];
+            self.formattedString = nil; //[self.inputFormatter stringFromNumber:@0];
             return YES;
         }
         return NO;
     }
 
-    self.validatedString = [self.numberFormatter stringFromNumber:replacedAmount];
+    self.formattedString = [self.numberFormatter stringFromNumber:replacedAmount];
     return YES;
 }
 
--(BOOL) validateValueString:(NSString *) string withAppendum:(NSNumber *)value
+-(BOOL) formatInputString:(NSString *) string withAppendum:(NSNumber *)value
 {
     long numberLong = [self longFromString:string];
     
@@ -71,12 +71,12 @@
     
     NSNumber *number = [NSNumber numberWithLong:numberLong + [value longValue]];
     
-    self.validatedString = [self.numberFormatter stringFromNumber:number];
+    self.formattedString = [self.numberFormatter stringFromNumber:number];
 
     return YES;
 }
 
--(BOOL) validateValueString:(NSString *) string withDeduction:(NSNumber *)value
+-(BOOL) formatInputString:(NSString *) string withDeduction:(NSNumber *)value
 {
     
     long numberLong = [self longFromString:string];
@@ -86,7 +86,7 @@
     }
     
     NSNumber *number = [NSNumber numberWithLong:numberLong - [value longValue]];
-    self.validatedString = [self.numberFormatter stringFromNumber:number];
+    self.formattedString = [self.numberFormatter stringFromNumber:number];
     
     return YES;
 }
@@ -94,10 +94,10 @@
 
 -(NSString *) formattedString
 {
-    if (!_validatedString) {
-        _validatedString = [NSString new];
+    if (!_formattedString) {
+        _formattedString = [NSString new];
     }
-    return _validatedString;
+    return _formattedString;
 }
 
 

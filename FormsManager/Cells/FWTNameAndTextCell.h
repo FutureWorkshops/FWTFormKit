@@ -12,8 +12,10 @@
 #import "FWTPlaceholder.h"
 #import "FWTTitle.h"
 #import "FWTTextFieldInputError.h"
+#import "FWTCellAppearanceProtocol.h"
 
-@interface FWTNameAndTextCell : FWTTextInputCell <FWTPlaceholder, FWTTitle>
+
+@interface FWTNameAndTextCell : FWTTextInputCell <FWTPlaceholder, FWTTitle, FWTCellAppearanceProtocol>
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UITextField *textField;

@@ -47,6 +47,22 @@
     self.subtitleLabel.font = font;
 }
 
+-(void)setTextFieldColor:(UIColor *)color font:(UIFont *)font
+{
+    self.valueTextField.font = font;
+    self.valueTextField.textColor = color;
+}
+
+
+-(void)setCellInputFormatter:(id)formatter
+{
+    self.inputFormatter = formatter;
+}
+
+-(void) setCellInputValidator:(id)validator
+{
+    
+}
 
 #pragma mark - textfieldDelegate
 
@@ -54,19 +70,19 @@
 {
     
     NSString *replaced = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    if ([self.validator conformsToProtocol:@protocol(FWTStringFormatterProtocol)]) {
-        if ([self.validator respondsToSelector:@selector(formatInputText:)]) {
-            if ([self.validator formatInputText:replaced]) {
-                self.valueTextField.text = [self.validator formattedString];
+    if ([self.inputFormatter conformsToProtocol:@protocol(FWTStringFormatterProtocol)]) {
+        if ([self.inputFormatter respondsToSelector:@selector(formatInputText:)]) {
+            if ([self.inputFormatter formatInputText:replaced]) {
+                self.valueTextField.text = [self.inputFormatter formattedString];
             } else {
                 [self.inputErrorDelegate cell:self generateInputErrorInTextField:textField];
             };
 
             return NO;
-        } else if ([self.validator respondsToSelector:@selector(formatText:withReplacedCharacter:inRange:)])
+        } else if ([self.inputFormatter respondsToSelector:@selector(formatText:withReplacedCharacter:inRange:)])
         {
-            if ([self.validator formatText:textField.text withReplacedCharacter:string inRange:range]) {
-                self.valueTextField.text = [self.validator formattedString];
+            if ([self.inputFormatter formatText:textField.text withReplacedCharacter:string inRange:range]) {
+                self.valueTextField.text = [self.inputFormatter formattedString];
             } else
             {
                 [self.inputErrorDelegate cell:self generateInputErrorInTextField:textField];    

@@ -10,9 +10,6 @@
 
 @interface FWTCurrencyInputFormatterWithMaxValue ()
 
-@property (nonatomic) NSString *validatedString;
-//@property (nonatomic)
-
 @end
 
 @implementation FWTCurrencyInputFormatterWithMaxValue
@@ -33,7 +30,7 @@
 -(BOOL) formatInputText:(NSString *)string
 {
     
-    long delta =  [self longFromString:string] - [self longFromString:self.validatedString];
+    long delta =  [self longFromString:string] - [self longFromString:self.formattedString];
     
     if (delta <= [self.maxValue longValue]) {
         return [super formatInputText:string];
@@ -42,21 +39,21 @@
     return NO;
 }
 
--(BOOL)validateValueString:(NSString *)string withAppendum:(NSNumber *)value
+-(BOOL)formatInputString:(NSString *)string withAppendum:(NSNumber *)value
 {
     if ([value longValue] <= [self.maxValue longValue]) {
-        return [super validateValueString:string withAppendum:value];
+        return [super formatInputString:string withAppendum:value];
     }
     return NO;
 
 
 }
 
--(BOOL)validateValueString:(NSString *)string withDeduction:(NSNumber *)value
+-(BOOL)formatInputString:(NSString *)string withDeduction:(NSNumber *)value
 {
     
     if ([value longValue] <= [self longFromString:string]) {
-        return [super validateValueString:string withDeduction:value];
+        return [super formatInputString:string withDeduction:value];
     }
     return NO;
 

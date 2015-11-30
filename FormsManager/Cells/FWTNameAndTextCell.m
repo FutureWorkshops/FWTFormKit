@@ -27,6 +27,11 @@
     self.textField.leftViewMode = UITextFieldViewModeAlways;
 }
 
+-(void)setTextFieldColor:(UIColor *)color font:(UIFont *)font
+{
+    self.textField.font = font;
+    self.textField.textColor = color;
+}
 
 #pragma mark - PlaceHolderProtocol 
 
