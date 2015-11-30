@@ -10,10 +10,12 @@
 #import "FWTStringFormatterProtocol.h"
 #import "FWTTextFieldResponderProtocol.h"
 #import "FWTFormCell.h"
+#import "FWTTextFieldInputDelegate.h"
 
 @interface FWTTextInputCell : FWTFormCell <FWTTextFieldResponderProtocol>
 
 @property (nonatomic) id <FWTTextFieldResponderChainHandlerProtocol> textFieldResponderChainHandler;
+@property (nonatomic) id <FWTTextFieldInputDelegate> textFieldInputDelegate;
 
 @end
 

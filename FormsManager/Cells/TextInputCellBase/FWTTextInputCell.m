@@ -10,12 +10,11 @@
 #import "NSNumberFormatter+FWTNumberFormatter.h"
 
 
-@interface FWTTextInputCell () 
+@interface FWTTextInputCell () <UITextFieldDelegate>
 
 @end
 
 @implementation FWTTextInputCell
-
 
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -30,6 +29,17 @@
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
     textField.returnKeyType = UIReturnKeyNext;
+    
+    if ([self.textFieldInputDelegate conformsToProtocol:@protocol(FWTTextFieldInputDelegate)]) {
+        [self.textFieldInputDelegate fwt_textFieldBeginEditing:textField];
+    }
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if ([self.textFieldInputDelegate conformsToProtocol:@protocol(FWTTextFieldInputDelegate)]) {
+        [self.textFieldInputDelegate fwt_textFieldEndEditing:textField];
+    }
 }
 
 
