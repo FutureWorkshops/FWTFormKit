@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol FWTMaxValueValidatorProtocol <NSObject>
+@protocol FWTMaxValueFormatterProtocol <NSObject>
 
 @required
 @property (nonatomic) NSNumber *maxValue;

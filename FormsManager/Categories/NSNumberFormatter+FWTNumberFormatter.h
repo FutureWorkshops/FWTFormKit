@@ -16,7 +16,7 @@
 + (instancetype) numberFormatterForAmountLabelWithLocalCurrencySymbolWithMeasurmentUnitString:(NSString *) measurmentUnitString;
 + (instancetype) numberFormatterWithPercentageSymbol;
 + (instancetype) numberFormatterWithYearSymbol;
-+(instancetype) numberFormatterWithCustomSymbol:(NSString *) symbol;
++ (instancetype) numberFormatterWithCustomSymbol:(NSString *) symbol;
 
 + (instancetype) numberFormatterForUnsignedInteger;
 + (NSString *) currencySymbolForCurrentUserLocale;

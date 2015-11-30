@@ -20,7 +20,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *subtitleLabel;
 @property (strong, nonatomic) IBOutlet UITextField *valueTextField;
 
-@property (nonatomic) id <FWTStringValidatorProtocol> validator;
+@property (nonatomic) id <FWTStringFormatterProtocol> validator;
 @property (nonatomic) id <FWTTextFieldInputError> inputErrorDelegate;
 
 

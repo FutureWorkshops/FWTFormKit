@@ -7,8 +7,7 @@
 //
 
 #import "FWTNameAndValueCell.h"
-#import "UITextField+FWT.h"
-#import "FWTStringValidatorProtocol.h"
+#import "FWTStringFormatterProtocol.h"
 
 @interface FWTNameAndValueCell () <UITextFieldDelegate>
 
@@ -55,19 +54,19 @@
 {
     
     NSString *replaced = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    if ([self.validator conformsToProtocol:@protocol(FWTStringValidatorProtocol)]) {
-        if ([self.validator respondsToSelector:@selector(validateText:)]) {
-            if ([self.validator validateText:replaced]) {
-                self.valueTextField.text = [self.validator validatedString];
+    if ([self.validator conformsToProtocol:@protocol(FWTStringFormatterProtocol)]) {
+        if ([self.validator respondsToSelector:@selector(formatInputText:)]) {
+            if ([self.validator formatInputText:replaced]) {
+                self.valueTextField.text = [self.validator formattedString];
             } else {
                 [self.inputErrorDelegate cell:self generateInputErrorInTextField:textField];
             };
 
             return NO;
-        } else if ([self.validator respondsToSelector:@selector(validateText:withReplacedCharacter:inRange:)])
+        } else if ([self.validator respondsToSelector:@selector(formatText:withReplacedCharacter:inRange:)])
         {
-            if ([self.validator validateText:textField.text withReplacedCharacter:string inRange:range]) {
-                self.valueTextField.text = [self.validator validatedString];
+            if ([self.validator formatText:textField.text withReplacedCharacter:string inRange:range]) {
+                self.valueTextField.text = [self.validator formattedString];
             } else
             {
                 [self.inputErrorDelegate cell:self generateInputErrorInTextField:textField];    

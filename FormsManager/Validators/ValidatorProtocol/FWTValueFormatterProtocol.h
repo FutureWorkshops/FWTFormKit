@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FWTValidatorWithFormatterProtocol.h"
+#import "FWTInputFormatterWithNumberFormatterProtocol.h"
 
-@protocol FWTValueValidatorProtocol <FWTValidatorWithFormatterProtocol>
+@protocol FWTValueFormatterProtocol <FWTInputFormatterWithNumberFormatterProtocol>
 
 @required
 -(BOOL) validateValueString:(NSString *) string withAppendum:(NSNumber *)value;

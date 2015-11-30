@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol FWTValidatorWithFormatterProtocol <NSObject>
+@protocol FWTInputFormatterWithNumberFormatterProtocol <NSObject>
 
 @required
--(NSNumberFormatter *) inputFormatter;
+-(NSNumberFormatter *) numberFormatter;
 
 
 @end

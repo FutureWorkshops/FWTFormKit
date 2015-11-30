@@ -6,40 +6,47 @@
 //
 //
 
-#import "FWTCurrencyValueInputValidator.h"
+#import "FWTCurrencyInputFormatter.h"
 #import "NSNumberFormatter+FWTNumberFormatter.h"
 
 
-@interface FWTCurrencyValueInputValidator ()
+@interface FWTCurrencyInputFormatter ()
 
 @property (nonatomic) NSString *validatedString;
 
 @end
 
-@implementation FWTCurrencyValueInputValidator
+@implementation FWTCurrencyInputFormatter
 
 
-+(instancetype) currencyInputValidatorWithFormatter:(NSNumberFormatter *) numberFormatter
++(instancetype) currencyInputFormatterWithDefaultNumberFormatter {
+ 
+    FWTCurrencyInputFormatter *inputFormatter  = [FWTCurrencyInputFormatter new];
+    return inputFormatter;
+}
+
+
++(instancetype) currencyInputFormatterWithNumberFormatter:(NSNumberFormatter *) numberFormatter
 {
-    FWTCurrencyValueInputValidator *validator  = [FWTCurrencyValueInputValidator new];
-    validator.inputFormatter = numberFormatter;
+    FWTCurrencyInputFormatter *validator  = [FWTCurrencyInputFormatter new];
+    validator.numberFormatter = numberFormatter;
     return validator;
 }
 
--(NSNumberFormatter *) inputFormatter
+-(NSNumberFormatter *) numberFormatter
 {
-    if (!_inputFormatter) {
-        _inputFormatter = [NSNumberFormatter numberFormatterForCurrencyWithUserLocaleCurrencySymbol];
+    if (!_numberFormatter) {
+        _numberFormatter = [NSNumberFormatter numberFormatterForCurrencyWithUserLocaleCurrencySymbol];
     }
     
-    return _inputFormatter;
+    return _numberFormatter;
 }
 
 
--(BOOL) validateText:(NSString *)value
+-(BOOL) formatInputText:(NSString *)value
 {    
-    NSUInteger minimumTextLenght = self.inputFormatter.currencySymbol.length;
-    NSNumber *replacedAmount = [self.inputFormatter numberFromString:value];
+    NSUInteger minimumTextLenght = self.numberFormatter.currencySymbol.length;
+    NSNumber *replacedAmount = [self.numberFormatter numberFromString:value];
     
     if (replacedAmount == nil) {
         //Probably non numeric character OR all meaningful digits were deleted.
@@ -50,7 +57,7 @@
         return NO;
     }
 
-    self.validatedString = [self.inputFormatter stringFromNumber:replacedAmount];
+    self.validatedString = [self.numberFormatter stringFromNumber:replacedAmount];
     return YES;
 }
 
@@ -58,13 +65,13 @@
 {
     long numberLong = [self longFromString:string];
     
-    if (numberLong + [value doubleValue] > [self.inputFormatter.maximum doubleValue]) {
+    if (numberLong + [value doubleValue] > [self.numberFormatter.maximum doubleValue]) {
         return NO;
     }
     
     NSNumber *number = [NSNumber numberWithLong:numberLong + [value longValue]];
     
-    self.validatedString = [self.inputFormatter stringFromNumber:number];
+    self.validatedString = [self.numberFormatter stringFromNumber:number];
 
     return YES;
 }
@@ -79,13 +86,13 @@
     }
     
     NSNumber *number = [NSNumber numberWithLong:numberLong - [value longValue]];
-    self.validatedString = [self.inputFormatter stringFromNumber:number];
+    self.validatedString = [self.numberFormatter stringFromNumber:number];
     
     return YES;
 }
 
 
--(NSString *) validatedString
+-(NSString *) formattedString
 {
     if (!_validatedString) {
         _validatedString = [NSString new];
@@ -97,7 +104,7 @@
 // convinience
 -(long) longFromString:(NSString *) string
 {
-    NSNumber *number =[self.inputFormatter numberFromString: string];
+    NSNumber *number =[self.numberFormatter numberFromString: string];
     return  [number longValue];
 }
 

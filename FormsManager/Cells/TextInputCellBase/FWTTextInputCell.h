@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FWTStringValidatorProtocol.h"
+#import "FWTStringFormatterProtocol.h"
 #import "FWTTextFieldResponderProtocol.h"
 #import "FWTFormCell.h"
 

@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol FWTPercentFormatterWithCustomSymbolValidatorProtocol <NSObject>
+@protocol FWTCustomSymbolInputFormatterProtocol <NSObject>
 
 @optional
--(BOOL) validateText:(NSString *) string withReplacedCharacter:(NSString *) string inRange:(NSRange) range;
+-(BOOL) formatText:(NSString *) string withReplacedCharacter:(NSString *) string inRange:(NSRange) range;
 
 @end

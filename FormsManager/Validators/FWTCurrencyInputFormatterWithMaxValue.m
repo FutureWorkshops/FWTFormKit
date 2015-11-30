@@ -6,23 +6,23 @@
 //
 //
 
-#import "FWTCurrencyInputValidatorWithMaxValue.h"
+#import "FWTCurrencyInputFormatterWithMaxValue.h"
 
-@interface FWTCurrencyInputValidatorWithMaxValue ()
+@interface FWTCurrencyInputFormatterWithMaxValue ()
 
 @property (nonatomic) NSString *validatedString;
 //@property (nonatomic)
 
 @end
 
-@implementation FWTCurrencyInputValidatorWithMaxValue
+@implementation FWTCurrencyInputFormatterWithMaxValue
 
 
-+(instancetype) currencyInputValidatorWithFormatter:(NSNumberFormatter *) numberFormatter maxValue:(NSNumber *) maxValue
++(instancetype) currencyInputFormatterWithNumberFormatter:(NSNumberFormatter *) numberFormatter maxValue:(NSNumber *) maxValue
 {
     
-    FWTCurrencyInputValidatorWithMaxValue *validator  = [FWTCurrencyInputValidatorWithMaxValue new];
-    validator.inputFormatter = numberFormatter;
+    FWTCurrencyInputFormatterWithMaxValue *validator  = [FWTCurrencyInputFormatterWithMaxValue new];
+    validator.numberFormatter = numberFormatter;
     validator.maxValue = maxValue;
     return validator;
 }
@@ -30,13 +30,13 @@
 
 #pragma mark - Override
 
--(BOOL) validateText:(NSString *)string
+-(BOOL) formatInputText:(NSString *)string
 {
     
     long delta =  [self longFromString:string] - [self longFromString:self.validatedString];
     
     if (delta <= [self.maxValue longValue]) {
-        return [super validateText:string];
+        return [super formatInputText:string];
     }
     
     return NO;
