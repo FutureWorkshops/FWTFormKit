@@ -53,7 +53,6 @@
     self.valueTextField.textColor = color;
 }
 
-
 -(void)setCellInputFormatter:(id)formatter
 {
     self.inputFormatter = formatter;
@@ -98,9 +97,16 @@
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     if ([self.inputValidator conformsToProtocol:@protocol(FWTValidationProtocol)]) {
+      
         if (![self.inputValidator isValidInputString:textField.text]) {
             if ([self.inputErrorDelegate conformsToProtocol:@protocol(FWTTextFieldInputError)]) {
                 [self.inputErrorDelegate cell:self generateInputErrorInTextField:textField];
+            }
+        } else {
+            if ([self.inputErrorDelegate conformsToProtocol:@protocol(FWTTextFieldInputError)]) {
+                if([self.inputErrorDelegate cell:self textFieldShouldCleanErrorOnEndEditing:textField]) {
+                    [self.inputErrorDelegate cell:self cleanErrorForInputTextFeild:textField];
+                }
             }
         }
     }

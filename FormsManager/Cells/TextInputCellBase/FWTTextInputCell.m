@@ -26,13 +26,20 @@
     return NO;
 }
 
--(void)textFieldDidBeginEditing:(UITextField *)textField
+-(void) textFieldDidBeginEditing:(UITextField *)textField
 {
     textField.returnKeyType = UIReturnKeyNext;
     
     if ([self.textFieldInputDelegate conformsToProtocol:@protocol(FWTTextFieldInputDelegate)]) {
         [self.textFieldInputDelegate cell:self textFieldBeginEditing: textField];
     }
+    
+    if ([self.inputErrorDelegate conformsToProtocol:@protocol(FWTTextFieldInputError)]) {
+        if([self.inputErrorDelegate cell:self textFieldShouldCleanErrorOnBeginEditing:textField]) {
+            [self.inputErrorDelegate cell:self cleanErrorForInputTextFeild:textField];
+        }
+    }
+    
 }
 
 

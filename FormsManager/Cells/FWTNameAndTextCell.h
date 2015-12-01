@@ -19,6 +19,5 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UITextField *textField;
-@property (nonatomic) id <FWTTextFieldInputError> inputErrorDelegate;
 
 @end

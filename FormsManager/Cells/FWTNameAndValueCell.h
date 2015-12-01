@@ -14,7 +14,6 @@
 #import "FWTTitle.h"
 #import "FWTInputFormattableCell.h"
 #import "FWTInputValidatableCell.h"
-#import "FWTTextFieldInputError.h"
 
 @interface FWTNameAndValueCell : FWTTextInputCell <FWTPlaceholder, FWTSubtitle, FWTTitle, FWTInputFormattableCell, FWTInputValidatableCell>
 
@@ -23,7 +22,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *valueTextField;
 
 @property (nonatomic) id <FWTStringFormatterProtocol> inputFormatter;
-@property (nonatomic) id <FWTTextFieldInputError> inputErrorDelegate;
 
 
 @end
