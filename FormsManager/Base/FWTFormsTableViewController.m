@@ -30,6 +30,8 @@
 @property (nonatomic) id<FWTFormDescriptionProtocol> formDescriptionDataSource;
 @property (nonatomic,readwrite) FWTFormAppearanceManager *appearanceManager;
 @property (nonatomic) NSIndexPath *opendAuxiliaryRowIndexPath;
+@property (nonatomic, strong) NSMutableDictionary *cacheHeight;
+
 
 @end
 
@@ -78,6 +80,15 @@
 -(void)dealloc
 {
     [self.observerManager removeObserversForCells];
+}
+
+
+- (NSDictionary *)cacheHeight
+{
+    if (!self->_cacheHeight) {
+        self->_cacheHeight = [NSMutableDictionary new];
+    }
+    return self->_cacheHeight;
 }
 
 -(id<FWTAuxiliaryRowProtocol>)auxiliaryRowsHandler
@@ -136,9 +147,21 @@
     return  [self.appearanceManager numberOfVisibleRowsInSection:section];
 }
 
--(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return kDefaultEstimatedCellHeight;
+    NSString *reuseIndetifier = [self.appearanceManager visibleCellConfigurationForIndexPath:indexPath].identifier;
+    NSNumber *cachedHeight = self.cacheHeight[reuseIndetifier];
+    if (cachedHeight) {
+        return [cachedHeight floatValue];
+    }
+    else {
+        UITableViewCell *cell = [self _tabelViewCellWithReuseIdentifier:reuseIndetifier];
+        NSNumber *height = [NSNumber numberWithFloat:cell.frame.size.height];
+        [self.cacheHeight setObject:height forKey:reuseIndetifier];
+        
+        return cell.frame.size.height;
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -249,6 +272,7 @@
     
     FWTCellConfiguration *cellConfiguration  = [self.appearanceManager visibleCellConfigurationForIndexPath:indexPath];
     if (cellConfiguration.isAuxiliaryRowActivator) {
+        [self.view endEditing:YES]; // resign Fisrt Responder if any to Dismiss keyboard. 
         [self.auxiliaryRowsHandler displayInlineAuxiliaryRowForRowAtIndexPath:indexPath];
     }
     

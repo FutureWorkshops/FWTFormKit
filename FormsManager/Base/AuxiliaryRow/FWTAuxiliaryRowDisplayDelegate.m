@@ -39,7 +39,7 @@
 -(void) displayInlineAuxiliaryRowForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    [UIView animateWithDuration:0.7f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
         [self.tableView beginUpdates];
         
         BOOL before = NO;   // indicates if the AuxiliaryRow is below "indexPath", help us determine which row to reveal
@@ -75,7 +75,7 @@
         
     } completion:^(BOOL finished) {
         if (self.opendAuxiliaryRowIndexPath) {
-            [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+            [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
         }
     }];
     
