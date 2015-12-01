@@ -11,6 +11,10 @@
 @protocol FWTTextFieldInputError <NSObject>
 
 -(void) cell:(id) sender generateInputErrorInTextField:(UITextField *) textField;
+-(BOOL) cell:(id) cell textFieldShouldCleanErrorOnBeginEditing:(UITextField *) textField;
+-(BOOL) cell:(id) cell textFieldShouldCleanErrorOnEndEditing:(UITextField *) textField;
+
+-(void) cell:(id) cell cleanErrorForInputTextFeild:(UITextField *) textField;
 
 
 @end
