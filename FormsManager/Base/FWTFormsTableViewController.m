@@ -9,7 +9,6 @@
 #import "FWTFormsTableViewController.h"
 #import "FWTFormsTableViewController+FWTTextFieldResponders.h"
 #import "FWTTextFieldResponderProtocol.h"
-#import "FWTFormsTableViewController+FWTObserverManager.h"
 #import "FWTSectionHeaderView.h"
 #import "FWTPickerCell.h"
 #import "FWTAuxiliaryRowDisplayDelegate.h"
@@ -78,7 +77,7 @@
 
 -(void)dealloc
 {
-    [self removeObserversForCells];
+    [self.observerManager removeObserversForCells];
 }
 
 -(id<FWTAuxiliaryRowProtocol>)auxiliaryRowsHandler
@@ -107,13 +106,10 @@
     }
 }
 
--(NSDictionary *)observedCells
+-(void)setObserverDelegate:(id<FWTObserverDelegate>)observerDelegate
 {
-    if (!_observedCells) {
-        _observedCells = [[NSDictionary alloc] init];
-    }
-    
-    return _observedCells;
+    self->_observerDelegate = observerDelegate;
+    self.observerManager = [[FWTCellObserverManager alloc] initWithObserverDelegate:observerDelegate];
 }
 
 -(NSDictionary *)textFieldResponders
@@ -205,6 +201,11 @@
         [cell performSelector:@selector(setInputValidator:) withObject:cellConfiguration.inputValidator];
     }
     
+    
+    if ([cell conformsToProtocol:@protocol(FWTInputFormattableCell)]) {
+        [cell performSelector:@selector(setInputFormatter:) withObject:cellConfiguration.inputFormatter];
+    }
+    
     return cell;
 }
 #pragma clang diagnostic pop
@@ -226,7 +227,7 @@
     if ([self conformsToProtocol:@protocol(FWTCellObservableProtocol)]) {
         if ([self isObservableCell:cell forIndexPath:indexPath]) {
             for (NSString *keyPath in [self keyPathsForObservedCell:cell]) {
-                [self registerObserverForCell:cell withIndexPath:indexPath forKeyPath:keyPath];
+                [self.observerManager registerObserverForCell:cell withIndexPath:indexPath forKeyPath:keyPath];
             }
         }
     }
@@ -258,9 +259,7 @@
 
 -(void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self.observedCells objectForKey:indexPath]) {
-        [self removeObserverForCellAtIndexPath:indexPath];
-    }
+    [self.observerManager removeObserverForCellAtIndexPath:indexPath];
 }
 
 
