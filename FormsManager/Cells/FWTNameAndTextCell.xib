@@ -7,15 +7,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="FWTNameAndTextCell" rowHeight="60" id="Qad-dC-Vqj" userLabel="FWTNameAndTextCell" customClass="FWTNameAndTextCell">
-            <rect key="frame" x="0.0" y="0.0" width="573" height="60"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="FWTNameAndTextCell" rowHeight="96" id="Qad-dC-Vqj" userLabel="FWTNameAndTextCell" customClass="FWTNameAndTextCell">
+            <rect key="frame" x="0.0" y="0.0" width="440" height="60"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qad-dC-Vqj" id="mQ6-oo-Yzq">
-                <rect key="frame" x="0.0" y="0.0" width="573" height="59"/>
+                <rect key="frame" x="0.0" y="0.0" width="440" height="59"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ot3-fZ-NkJ">
-                        <rect key="frame" x="0.0" y="0.0" width="573" height="59"/>
+                        <rect key="frame" x="0.0" y="0.0" width="440" height="59"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="248" text="NAME NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJX-tw-bfH">
                                 <rect key="frame" x="20" y="21" width="82" height="17"/>
@@ -25,7 +25,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="NAME" textAlignment="right" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="iZ6-fy-kGA">
-                                <rect key="frame" x="116" y="9" width="437" height="42"/>
+                                <rect key="frame" x="116" y="9" width="304" height="42"/>
                                 <animations/>
                                 <color key="tintColor" red="0.0" green="0.2274509804" blue="0.28627450980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="textColor" red="0.0" green="0.2274509804" blue="0.28627450980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -38,10 +38,10 @@
                         <constraints>
                             <constraint firstItem="NJX-tw-bfH" firstAttribute="top" secondItem="ot3-fZ-NkJ" secondAttribute="top" constant="21" id="1h5-Kf-8f6"/>
                             <constraint firstAttribute="trailing" secondItem="iZ6-fy-kGA" secondAttribute="trailing" constant="20" id="6mW-dr-7kK"/>
+                            <constraint firstAttribute="bottom" secondItem="iZ6-fy-kGA" secondAttribute="bottom" constant="8" id="IJm-zp-4Ez"/>
                             <constraint firstItem="NJX-tw-bfH" firstAttribute="leading" secondItem="ot3-fZ-NkJ" secondAttribute="leading" constant="20" id="NHg-YK-yam"/>
                             <constraint firstItem="NJX-tw-bfH" firstAttribute="centerY" secondItem="ot3-fZ-NkJ" secondAttribute="centerY" id="NMp-Zt-Dtl"/>
                             <constraint firstAttribute="bottom" secondItem="NJX-tw-bfH" secondAttribute="bottom" constant="21" id="SCO-hA-Bga"/>
-                            <constraint firstItem="iZ6-fy-kGA" firstAttribute="centerY" secondItem="ot3-fZ-NkJ" secondAttribute="centerY" id="TZC-bz-Ry5"/>
                             <constraint firstItem="iZ6-fy-kGA" firstAttribute="top" secondItem="ot3-fZ-NkJ" secondAttribute="top" constant="9" id="WeC-UZ-4ma"/>
                             <constraint firstItem="iZ6-fy-kGA" firstAttribute="leading" secondItem="NJX-tw-bfH" secondAttribute="trailing" constant="14" id="eB3-1A-XnD"/>
                         </constraints>
@@ -62,7 +62,7 @@
                 <outlet property="textField" destination="iZ6-fy-kGA" id="YQe-f7-mha"/>
                 <outlet property="titleLabel" destination="NJX-tw-bfH" id="MbM-eO-rMv"/>
             </connections>
-            <point key="canvasLocation" x="853.5" y="576.5"/>
+            <point key="canvasLocation" x="787" y="594"/>
         </tableViewCell>
     </objects>
 </document>

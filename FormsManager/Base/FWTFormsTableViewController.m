@@ -157,7 +157,7 @@
     }
     else {
         UITableViewCell *cell = [self _tabelViewCellWithReuseIdentifier:reuseIndetifier];
-        NSNumber *height = [NSNumber numberWithFloat:cell.frame.size.height];
+        NSNumber *height = [NSNumber numberWithDouble:cell.frame.size.height];
         [self.cacheHeight setObject:height forKey:reuseIndetifier];
         
         return cell.frame.size.height;
@@ -272,7 +272,7 @@
     
     FWTCellConfiguration *cellConfiguration  = [self.appearanceManager visibleCellConfigurationForIndexPath:indexPath];
     if (cellConfiguration.isAuxiliaryRowActivator) {
-        [self.view endEditing:YES]; // resign Fisrt Responder if any to Dismiss keyboard. 
+        [self.view endEditing:YES]; // resign Fisrt Responder if any to Dismiss keyboard.
         [self.auxiliaryRowsHandler displayInlineAuxiliaryRowForRowAtIndexPath:indexPath];
     }
     
