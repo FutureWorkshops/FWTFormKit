@@ -20,7 +20,7 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8Uc-cx-YCN">
                                 <rect key="frame" x="251" y="14" width="51" height="31"/>
                                 <animations/>
-                                <color key="onTintColor" red="0.72156862749999995" green="0.99607843139999996" blue="0.81960784310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="onTintColor" red="0.1019607843" green="0.23137254900000001" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5p-RY-BPQ">
                                 <rect key="frame" x="20" y="18" width="214" height="24"/>
