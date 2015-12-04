@@ -35,7 +35,7 @@
     self.titleLable.text = title;
 }
 
--(void)setTitleLableColor:(UIColor *)color font:(UIFont *)font
+-(void)setTitleLabelColor:(UIColor *)color font:(UIFont *)font
 {
     self.titleLable.textColor = color;
     self.titleLable.font = font;

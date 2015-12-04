@@ -22,7 +22,6 @@
 }
 
 
-
 -(void) _KVOWorkAround:(UISwitch *) sender
 {
     self.switchSelectorState = [NSNumber numberWithBool:sender.on];
@@ -33,5 +32,13 @@
 {
     self.titleLabel.text = title;
 }
+
+-(void)setTitleLabelColor:(UIColor *)color font:(UIFont *)font
+{
+    self.titleLabel.textColor = color;
+    self.titleLabel.font = font;
+    self.switchSelector.onTintColor = color;
+}
+
 
 @end

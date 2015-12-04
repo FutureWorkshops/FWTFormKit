@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "FWTFormCell.h"
 #include "FWTTitle.h"
+#import "FWTCellAppearanceProtocol.h"
 
-@interface FWTNameAndSwitchCell : FWTFormCell <FWTTitle>
+@interface FWTNameAndSwitchCell : FWTFormCell <FWTTitle, FWTCellAppearanceProtocol>
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UISwitch *switchSelector;

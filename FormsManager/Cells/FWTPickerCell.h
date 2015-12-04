@@ -10,7 +10,7 @@
 #import "FWTFormCell.h"
 #import "FWTCellAppearanceProtocol.h"
 
-@interface FWTPickerCell : FWTFormCell
+@interface FWTPickerCell : FWTFormCell <FWTCellAppearanceProtocol>
 
 @property (nonatomic) IBOutlet UIPickerView *pickerview;
 @property (nonatomic) NSInteger selectedIndex;

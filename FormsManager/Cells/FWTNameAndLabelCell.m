@@ -35,4 +35,10 @@
     self.itemTitleLable.text = title;
 }
 
+-(void)setTitleLabelColor:(UIColor *)color font:(UIFont *)font
+{
+    self.itemTitleLable.textColor = color;
+    self.itemTitleLable.font = font;
+}
+
 @end

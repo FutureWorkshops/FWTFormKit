@@ -14,7 +14,7 @@
 -(void) setContentMargin:(CGFloat) margin;
 -(void) setCellBackgroundColor:(UIColor *) color;
 -(void) setComplimentaryBackgroundColor:(UIColor *) complimentaryColor;
--(void) setTitleLableColor:(UIColor *) color font:(UIFont *) font;
+-(void) setTitleLabelColor:(UIColor *) color font:(UIFont *) font;
 -(void) setTextFieldColor:(UIColor *) color font:(UIFont *) font;
 -(void) setSubtitleColor:(UIColor *) colot font:(UIFont *) font;
 

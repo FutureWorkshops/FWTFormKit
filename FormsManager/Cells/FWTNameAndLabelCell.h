@@ -10,9 +10,10 @@
 #import "FWTTextInputCell.h"
 #import "FWTFormCell.h"
 #import "FWTAccessoryView.h"
-#include "FWTTitle.h"
+#import "FWTTitle.h"
+#import "FWTCellAppearanceProtocol.h"
 
-@interface FWTNameAndLabelCell : FWTFormCell <FWTAccessoryView, FWTTitle>
+@interface FWTNameAndLabelCell : FWTFormCell <FWTAccessoryView, FWTTitle,FWTCellAppearanceProtocol>
 
 @property (strong, nonatomic) IBOutlet UIImageView *accessoryImageView;
 @property (strong, nonatomic) IBOutlet UILabel *itemTitleLable;

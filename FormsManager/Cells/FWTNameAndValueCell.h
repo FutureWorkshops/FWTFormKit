@@ -14,8 +14,9 @@
 #import "FWTTitle.h"
 #import "FWTInputFormattableCell.h"
 #import "FWTInputValidatableCell.h"
+#import "FWTCellAppearanceProtocol.h"
 
-@interface FWTNameAndValueCell : FWTTextInputCell <FWTPlaceholder, FWTSubtitle, FWTTitle, FWTInputFormattableCell, FWTInputValidatableCell>
+@interface FWTNameAndValueCell : FWTTextInputCell <FWTPlaceholder, FWTSubtitle, FWTTitle, FWTInputFormattableCell, FWTInputValidatableCell, FWTCellAppearanceProtocol>
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLable;
 @property (strong, nonatomic) IBOutlet UILabel *subtitleLabel;
