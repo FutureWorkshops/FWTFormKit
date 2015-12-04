@@ -41,4 +41,11 @@
     self.itemTitleLable.font = font;
 }
 
+-(void)setValueLabelColor:(UIColor *)color font:(UIFont *)font
+{
+    self.valueLabel.textColor = color;
+    self.valueLabel.font = font;
+}
+
+
 @end
