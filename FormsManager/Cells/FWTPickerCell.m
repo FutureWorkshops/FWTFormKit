@@ -75,11 +75,16 @@
 
 -(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, pickerView.bounds.size.width, 43)];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.backgroundColor = self.complimentryBackGroundColor ? self.complimentryBackGroundColor : self.contentView.backgroundColor;
-    label.textColor = self.titleColor ? self.titleColor : [UIColor blackColor];
-    label.font = self.titleFont ? self.titleFont : [UIFont systemFontOfSize:14.0f];
+    UILabel *label =(UILabel *)view;
+    
+    if (label == nil) {
+        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, pickerView.bounds.size.width, 43)];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.backgroundColor = self.complimentryBackGroundColor ? self.complimentryBackGroundColor : self.contentView.backgroundColor;
+        label.textColor = self.titleColor ? self.titleColor : [UIColor blackColor];
+        label.font = self.titleFont ? self.titleFont : [UIFont systemFontOfSize:14.0f];
+    }
+    
     if (self.startDate != NSNotFound) {
         label.text = [NSString stringWithFormat:@"%lu", (unsigned long)self.startDate + row];
     } else
