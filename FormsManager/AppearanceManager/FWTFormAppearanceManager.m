@@ -47,6 +47,96 @@
 #pragma mark - Public
 
 
+
+-(void) addRowsAtIndexPaths:(NSArray *) indexPaths {
+
+    NSMutableArray *rowsToBeInserted = [NSMutableArray array];
+
+    NSArray *orderedArray = [indexPaths sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSInteger r1 = [obj1 row];
+        NSInteger r2 = [obj2 row];
+        if (r1 > r2) {
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+        if (r1 < r2) {
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        return (NSComparisonResult)NSOrderedSame;
+    }];
+    
+    for (NSIndexPath *indexPath in orderedArray) {
+        FWTSectionConfiguration *section = [self visibleSectionConfigurationWithIndex:indexPath.section];
+        NSArray *cellsConfiguration = section.cellsConfiguration;
+        FWTCellConfiguration *cellConfiguration = [cellsConfiguration objectAtIndex:indexPath.row];
+        if (cellConfiguration.dynamicCellKey != nil) {
+            NSAssert(NO, @"Dynamic Cell Configuration Description Can't be hidden");
+        }
+        if (!cellConfiguration.hidden) {
+            continue;
+        } else {
+            
+            cellConfiguration.hidden = NO;
+            NSIndexPath *tableViewIndexPath = [NSIndexPath indexPathForRow:[section.visibleCells indexOfObject:cellConfiguration] inSection:indexPath.section];
+            cellConfiguration.visibleCellTableViewIndexPath = tableViewIndexPath;
+            [rowsToBeInserted addObject:tableViewIndexPath];
+        }
+    }
+    
+    if ([rowsToBeInserted count] > 0) {
+        
+        [self.tableView beginUpdates];
+            [self.tableView insertRowsAtIndexPaths:rowsToBeInserted withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView endUpdates];
+
+    }
+    
+}
+
+
+-(void) removeRowsAtIndexPaths:(NSArray *) indexPaths {
+    
+    
+    
+    NSMutableArray *rowsToBeRemoved = [NSMutableArray array];
+    
+    NSArray *orderedArray = [indexPaths sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSInteger r1 = [obj1 row];
+        NSInteger r2 = [obj2 row];
+        if (r1 > r2) {
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        if (r1 < r2) {
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+        return (NSComparisonResult)NSOrderedSame;
+    }];
+    
+    for (NSIndexPath *indexPath in orderedArray) {
+        
+        FWTSectionConfiguration *section = [self visibleSectionConfigurationWithIndex:indexPath.section];
+        NSArray *cellsConfiguration = section.cellsConfiguration;
+        
+        FWTCellConfiguration *cellConfiguration = [cellsConfiguration objectAtIndex:indexPath.row];
+        if (cellConfiguration.visibleCellTableViewIndexPath != nil) {
+        
+            if (cellConfiguration.dynamicCellKey != nil) {
+                NSAssert(NO, @"Dynamic Cell Configuration Description Can't be hidden");
+            }
+            cellConfiguration.hidden = YES;
+            [rowsToBeRemoved addObject:cellConfiguration.visibleCellTableViewIndexPath];
+            cellConfiguration.visibleCellTableViewIndexPath = nil;
+        }
+    }
+
+    if ([rowsToBeRemoved count] > 0) {
+        [self.tableView beginUpdates];
+        [self.tableView deleteRowsAtIndexPaths:rowsToBeRemoved withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView endUpdates];
+
+    }
+
+}
+
 -(void) hide:(BOOL)hide formRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self hide:hide formRowsAtIndexPaths:[NSSet setWithArray:@[indexPath]]];
@@ -54,10 +144,18 @@
 
 -(void) hide:(BOOL)hide formRowsAtIndexPaths:(NSSet *)indexPathsSet
 {
+    
     for (NSIndexPath *indexPath in indexPathsSet) {
         FWTSectionConfiguration *section = [self visibleSectionConfigurationWithIndex:indexPath.section];
-        [section hideCells:hide withIndexPaths:[NSSet setWithArray:@[indexPath]]];
+        NSArray *cellsConfiguration = section.cellsConfiguration;
+        FWTCellConfiguration *cellConfiguration = [cellsConfiguration objectAtIndex:indexPath.row];
+        if (cellConfiguration.dynamicCellKey != nil) {
+            NSAssert(NO, @"Dynamic Cell Configuration Description Can't be hidden");
+        }
+        cellConfiguration.hidden = hide;
+        cellConfiguration.visibleCellTableViewIndexPath = hide ? nil : [NSIndexPath indexPathForRow:[section.visibleCells indexOfObject:cellConfiguration] inSection:indexPath.section];
     }
+
     
 }
 
@@ -155,6 +253,36 @@
     
     return [sectionConfig visibleCellConfigurationForIndexPath:visibleCellIndexPath];
 }
+
+
+-(NSSet *) indexPathsForFormRowsInSection:(NSUInteger)section
+{
+    FWTSectionConfiguration *sectionConfiguration;
+    if (section < [self.formConfiguration count]) {
+       sectionConfiguration = [self.formConfiguration objectAtIndex:section];
+    }
+    
+    if (sectionConfiguration) {
+        return [sectionConfiguration indexPathsForFormRows];
+    }
+    
+    return nil;
+}
+
+-(NSSet *)indexPathsForVisibleFormRowsInSection:(NSUInteger)section
+{
+    FWTSectionConfiguration *sectionConfiguration;
+    if (section < [self.formConfiguration count]) {
+        sectionConfiguration = [self visibleSectionConfigurationWithIndex:section];
+    }
+    
+    if (sectionConfiguration) {
+        return [sectionConfiguration indexPathsForVisibleFormRows];
+    }
+    
+    return nil;
+}
+
 
 #pragma mark - Private
 

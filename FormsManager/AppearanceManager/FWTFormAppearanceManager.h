@@ -23,6 +23,11 @@
 
 
 // configuration
+
+-(void) addRowsAtIndexPaths:(NSArray *) indexPaths;
+-(void) removeRowsAtIndexPaths:(NSArray *) indexPaths;
+
+
 - (void) hide:(BOOL) hide formSection:(NSUInteger) section;
 - (void) hide:(BOOL) hide formSections:(NSIndexSet *) sections;
 
@@ -33,6 +38,9 @@
 // dataSource
 - (FWTSectionConfiguration *) visibleSectionConfigurationWithIndex:(NSUInteger) sectionIndex;
 - (FWTCellConfiguration *) visibleCellConfigurationForIndexPath:(NSIndexPath *) indexPath;
+- (NSSet *) indexPathsForFormRowsInSection:(NSUInteger) section;
+- (NSSet *) indexPathsForVisibleFormRowsInSection:(NSUInteger) section;
+
 
 - (NSUInteger) numberOfVisibleSections;
 - (NSUInteger) numberOfVisibleRowsInSection: (NSUInteger) section;
