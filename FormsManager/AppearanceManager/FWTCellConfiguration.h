@@ -28,5 +28,6 @@
 
 @property (nonatomic) NSIndexPath * indexPath;
 @property (nonatomic) BOOL hidden;
+@property (nonatomic) NSIndexPath *visibleCellTableViewIndexPath;
 
 @end
