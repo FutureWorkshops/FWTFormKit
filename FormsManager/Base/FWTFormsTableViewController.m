@@ -274,6 +274,8 @@
     if (cellConfiguration.isAuxiliaryRowActivator) {
         [self.view endEditing:YES]; // resign Fisrt Responder if any to Dismiss keyboard.
         [self.auxiliaryRowsHandler displayInlineAuxiliaryRowForRowAtIndexPath:indexPath];
+        FWTSectionConfiguration *sectionConfiguration = [self.appearanceManager visibleSectionConfigurationWithIndex:indexPath.section];
+        [sectionConfiguration updateTableViewIndexPathesForVisibleCells];
     }
     
     return indexPath;
