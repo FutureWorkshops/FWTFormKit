@@ -23,6 +23,7 @@
         self.index = sectionIndex;
         self.cellsConfiguration = cells;
         NSAssert(!(self.sectionWithDynamicCells && ([self _numberOfDynamicCells] > 1)), @"Unsuported Form Description configuration. Section should contain only single dynamic cell description. Description for section contains: %lu dynamic cells.To resolve - put them into different sections", (unsigned long)[self _numberOfDynamicCells]);
+        [self updateTableViewIndexPathesForVisibleCells];
     }
     return self;
 }
@@ -56,11 +57,12 @@
             NSAssert(NO, @"Dynamic Cell Configuration Description Can't be hidden");
         }
         cellConfiguration.hidden = hide;
+        cellConfiguration.visibleCellTableViewIndexPath = hide ? nil : [NSIndexPath indexPathForRow:[self.visibleCells indexOfObject:cellConfiguration] inSection:indexPath.section];
     }
 }
 
 
-- (void) hide:(BOOL) hide rowsWithIdentifier:(NSString *) rowIdentifier {
+- (void) hide:(BOOL) hide rowWithIdentifier:(NSString *) rowIdentifier {
     NSPredicate *cellsWithIdentifier = [NSPredicate predicateWithFormat:@"(identifier == %@)", rowIdentifier];
     NSArray *cells = [self.cellsConfiguration filteredArrayUsingPredicate:cellsWithIdentifier];
     for (FWTCellConfiguration *cell in cells) {
@@ -113,6 +115,33 @@
     return [NSString stringWithFormat:@"Section Index = %lu, hidden = %u\nCells:%@, DynamicKey = %@", (unsigned long)self.index, self.hidden, self.cellsConfiguration, self.dynamicSectionKey];
 }
 
+-(NSSet *) indexPathsForFormRows
+{
+    NSMutableSet *set = [NSMutableSet set];
+    //FIXME : Dynamic Cells indexes not included in set
+    
+    for (FWTCellConfiguration *cellConfiguration in self.cellsConfiguration) {
+        [set addObject:cellConfiguration.indexPath];
+    }
+
+    return set;
+}
+
+-(NSSet *)indexPathsForVisibleFormRows
+{
+    //FIXME : Dynamic Cells indexes not included in set
+    NSPredicate *notHiddenCellsPredicate = [NSPredicate predicateWithFormat:@"(hidden != %@) AND (dynamicCellKey = %@)", [NSNumber numberWithBool:YES], nil];
+    NSMutableSet *set = [NSMutableSet set];
+    NSArray *visibleCells = [self.cellsConfiguration filteredArrayUsingPredicate:notHiddenCellsPredicate];
+    
+    for (FWTCellConfiguration *cellConfiguration in visibleCells) {
+        [set addObject:cellConfiguration.indexPath];
+    }
+    
+    return set;
+
+}
+
 #pragma mark - Private
 
 -(FWTCellConfiguration *) _dynamicCellConfigurationForRange:(NSRange) range
@@ -128,6 +157,14 @@
 {
     NSPredicate *dynamicCells = [NSPredicate predicateWithFormat:@"self.dynamicCellKey != %@", nil];
     return [[self.cellsConfiguration filteredArrayUsingPredicate:dynamicCells] count];
+}
+
+-(void) updateTableViewIndexPathesForVisibleCells {
+    
+    for (FWTCellConfiguration *cellConfiguration in self.visibleCells) {
+        cellConfiguration.visibleCellTableViewIndexPath = [NSIndexPath indexPathForRow:[self.visibleCells indexOfObject:cellConfiguration] inSection:cellConfiguration.indexPath.section];
+    }
+    
 }
 
 @end

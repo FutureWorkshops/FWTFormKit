@@ -38,14 +38,17 @@
 
 // appearence
 -(void) hideCells:(BOOL) hide withIndexPaths:(NSSet *)indexPathSet;
--(void) hide:(BOOL) hide rowsWithIdentifier:(NSString *) rowIdentifier;
+-(void) hide:(BOOL) hide rowWithIdentifier:(NSString *) rowIdentifier;
 
 // dataSource
 -(FWTCellConfiguration *) visibleCellConfigurationForIndexPath:(NSIndexPath *) indexPath;
 -(FWTCellConfiguration *) cellConfigurationForIndexPath:(NSIndexPath *)indexPath;
 
--(NSUInteger) numberOfVisibleCellInSection;
+- (NSSet *) indexPathsForFormRows;
+- (NSSet *) indexPathsForVisibleFormRows;
 
+-(NSUInteger) numberOfVisibleCellInSection;
+-(void) updateTableViewIndexPathesForVisibleCells; //update visible cell indexpathes. This index pathes are correlated to index pathes in the table view.
 
 // dynamic
 -(FWTCellConfiguration *) dynamicCellConfiguration;
