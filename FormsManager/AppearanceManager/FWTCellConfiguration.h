@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "FWTInputFormatterWithNumberFormatterProtocol.h"
+#import "FWTCellValidationErrorDelegate.h"
+
 @interface FWTCellConfiguration : NSObject
 
 @property (nonatomic) NSString *identifier;
@@ -20,15 +22,23 @@
 @property (nonatomic) NSString *dynamicCellKey;
 @property (nonatomic) NSString *placeholderText;
 @property (nonatomic) UIImage *accessoryViewImage;;
-@property (nonatomic) BOOL isAuxiliaryRowActivator;
-@property (nonatomic) BOOL isAuxiliaryRow;
+
 @property (nonatomic) BOOL isObservable;
-@property (nonatomic) id <FWTInputFormatterWithNumberFormatterProtocol> inputFormatter;
-@property (nonatomic) id inputValidator;
-@property (nonatomic) NSArray *validationRules;
+
 
 @property (nonatomic) NSIndexPath * indexPath;
 @property (nonatomic) BOOL hidden;
 @property (nonatomic) NSIndexPath *visibleCellTableViewIndexPath;
+
+// Validation and Formatter
+
+@property (nonatomic) id <FWTInputFormatterWithNumberFormatterProtocol> inputFormatter;
+@property (nonatomic) id inputValidator;
+@property (nonatomic) NSArray *validationRules;
+@property (nonatomic) FWTInputValidationStatus validationStatus;
+
+//Auxilary rows
+@property (nonatomic) BOOL isAuxiliaryRowActivator;
+@property (nonatomic) BOOL isAuxiliaryRow;
 
 @end
