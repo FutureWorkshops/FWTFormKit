@@ -10,6 +10,6 @@
 
 @protocol FWTValidationRule <NSObject>
 
--(BOOL) evaluateWithObject:(id) object;
+-(BOOL) evaluateWithValue:(id) value;
 
 @end

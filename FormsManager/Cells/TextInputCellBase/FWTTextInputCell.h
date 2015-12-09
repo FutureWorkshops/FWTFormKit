@@ -10,16 +10,14 @@
 #import "FWTStringFormatterProtocol.h"
 #import "FWTTextFieldResponderProtocol.h"
 #import "FWTFormCell.h"
-#import "FWTTextFieldInputDelegate.h"
 #import "FWTValidationProtocol.h"
-#import "FWTTextFieldInputError.h"
+#import "FWTCellValidationErrorDelegate.h"
 
 @interface FWTTextInputCell : FWTFormCell <FWTTextFieldResponderProtocol>
 
 @property (nonatomic) id <FWTTextFieldResponderChainHandlerProtocol> textFieldResponderChainHandler;
-@property (nonatomic) id <FWTTextFieldInputDelegate> textFieldInputDelegate;
 @property (nonatomic) id <FWTValidationProtocol> inputValidator;
-@property (nonatomic) id <FWTTextFieldInputError> inputErrorDelegate;
+@property (nonatomic) id <FWTCellValidationErrorDelegate> inputErrorDelegate;
 
 @end
 

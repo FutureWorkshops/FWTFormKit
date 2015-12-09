@@ -31,10 +31,10 @@
 }
 
 
--(BOOL) isValidInputString:(NSString *) string {
+-(BOOL) isValidInputValue:(id) value {
     
     for (id <FWTValidationRule> validationRule in self.validationRules) {
-        if (![validationRule evaluateWithObject:[self.numberFormatter numberFromString:string]]) return NO;
+        if (![validationRule evaluateWithValue:value]) return NO;
     }
     return YES;
 }

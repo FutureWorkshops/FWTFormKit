@@ -26,12 +26,13 @@
 }
 
 
--(BOOL) evaluateWithObject:(id)object
+-(BOOL) evaluateWithValue:(id) value
 {
-    if ([object respondsToSelector:@selector(compare:)] && [object isKindOfClass:[NSNumber class]]) {
+
+    if ([value respondsToSelector:@selector(compare:)] && [value isKindOfClass:[NSNumber class]]) {
     
-        NSComparisonResult leftOperandComparison = [object compare:self.minValue];
-        NSComparisonResult rightOperandComparison = [object compare:self.maxValue];
+        NSComparisonResult leftOperandComparison = [value compare:self.minValue];
+        NSComparisonResult rightOperandComparison = [value compare:self.maxValue];
         return ((leftOperandComparison== NSOrderedSame || leftOperandComparison == NSOrderedDescending) && (rightOperandComparison==NSOrderedSame || rightOperandComparison == NSOrderedAscending));
     }
     
