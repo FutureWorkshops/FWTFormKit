@@ -283,7 +283,7 @@
 
 -(void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.observerManager removeObserverForCellAtIndexPath:indexPath];
+    [self.observerManager removeObserverForCell:cell atIndexPath:indexPath];
 }
 
 

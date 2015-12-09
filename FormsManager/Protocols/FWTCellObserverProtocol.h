@@ -10,8 +10,6 @@
 
 @protocol FWTCellObservableProtocol <NSObject>
 
-
-@required
 -(NSArray *) keyPathsForObservedCell:(UITableViewCell* ) cell;
 -(BOOL) isObservableCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *) indexPath;
 

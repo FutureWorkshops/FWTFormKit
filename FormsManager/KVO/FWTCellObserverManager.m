@@ -12,7 +12,7 @@
 
 @interface FWTCellObserverManager () <FWTKVOProtocol>
 
-@property (nonatomic,readwrite) NSDictionary *observedCells; 
+@property (nonatomic,readwrite) NSArray *observedCells;
 @property (nonatomic,weak) id <FWTObserverDelegate> observerDelegate;
 
 @end
@@ -43,50 +43,24 @@
 
 -(void) registerObserverForCell:(UITableViewCell *) cell withIndexPath:(NSIndexPath *) indexPath forKeyPath:(NSString *) keyPath
 {
-    NSMutableDictionary *observedCells = self.observedCells ? [self.observedCells mutableCopy]: [NSMutableDictionary dictionaryWithCapacity:1];
-    id observedCellKeyPaths = nil;
+    NSMutableArray *observedCells = self.observedCells ? [self.observedCells mutableCopy]: [NSMutableArray arrayWithCapacity:1];
     
     FWTKVO *propertyObserver = [cell observeKeyPath:keyPath withObsever:self];
     
-    if ([observedCells objectForKey:indexPath]) {
-        if ([[observedCells objectForKey:indexPath] isKindOfClass:[NSArray class]]) {
-            NSMutableArray *propertyObservers = [observedCells objectForKey:indexPath];
-            [propertyObservers addObject:propertyObserver];
-            observedCellKeyPaths = propertyObservers;
-        } else
-        {
-            NSMutableArray *propertyObservers = [[NSMutableArray alloc] initWithCapacity:2];
-            [propertyObservers addObject:[observedCells objectForKey:indexPath]];
-            [propertyObservers addObject:propertyObserver];
-            observedCellKeyPaths = propertyObservers;
-        }
-    } else
-    {
-        observedCellKeyPaths = propertyObserver;
-    }
-    
-    [observedCells setObject:observedCellKeyPaths forKey:indexPath];
-    
+    [observedCells addObject:propertyObserver];
     self.observedCells = observedCells;
 }
 
 
--(void) removeObserverForCellAtIndexPath:(NSIndexPath *) indexPath
+-(void) removeObserverForCell:(UITableViewCell *) cell atIndexPath:(NSIndexPath *) indexPath
 {
-    NSMutableDictionary *observedCells = [self.observedCells mutableCopy];
+    NSMutableArray *observedCells = [self.observedCells mutableCopy];
     
-    if ([observedCells objectForKey:indexPath]) {
-        if ([[observedCells objectForKey:indexPath] isKindOfClass:[NSArray class]]) {
-            for (FWTKVO *propertyObserver in [observedCells objectForKey:indexPath]) {
-                [propertyObserver stopObservation];
-            }
-        } else
-        {
-            FWTKVO *propertyObserver = [observedCells objectForKey:indexPath];
-            [propertyObserver stopObservation];
+    for (FWTKVO *observer in self.observedCells) {
+        if (observer.subject == cell) {
+            [observer stopObservation];
+            [observedCells removeObject:observer];
         }
-        
-        [observedCells removeObjectForKey:indexPath];
     }
     
     self.observedCells = observedCells;
@@ -94,9 +68,10 @@
 
 -(void) removeObserversForCells
 {
-    for (NSIndexPath *indexPath in [self.observedCells allKeys]) {
-        [self removeObserverForCellAtIndexPath:indexPath];
-    }
+    for (FWTKVO *observer in self.observedCells) {
+        [observer stopObservation];
+    };
+    self.observedCells = nil;
 }
 
 

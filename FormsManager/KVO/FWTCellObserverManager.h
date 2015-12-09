@@ -13,13 +13,13 @@
 
 @interface FWTCellObserverManager : NSObject
 
-@property (nonatomic,readonly) NSDictionary *observedCells; // cell registered for KVO observation
+@property (nonatomic,readonly) NSArray *observedCells; // cell registered for KVO observation
 
 -(instancetype) initWithObserverDelegate:(id <FWTObserverDelegate>) delegate;
 
 // observers
 -(void) registerObserverForCell:(UITableViewCell *) cell withIndexPath:(NSIndexPath *) indexPath forKeyPath:(NSString *) keyPath;
--(void) removeObserverForCellAtIndexPath:(NSIndexPath *) indexPath;
+-(void) removeObserverForCell:(UITableViewCell *) cell atIndexPath:(NSIndexPath *) indexPath;
 -(void) removeObserversForCells;
 
 
