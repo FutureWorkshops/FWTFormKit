@@ -87,14 +87,18 @@
         [self.tableView beginUpdates];
             [self.tableView insertRowsAtIndexPaths:rowsToBeInserted withRowAnimation:UITableViewRowAnimationFade];
         [self.tableView endUpdates];
-
     }
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wselector"
+    [self.formConfiguration makeObjectsPerformSelector:@selector(updateTableViewIndexPathesForVisibleCells)];
+#pragma clang diagnostic pop
     
 }
 
 
+
 -(void) removeRowsAtIndexPaths:(NSArray *) indexPaths {
-    
     
     
     NSMutableArray *rowsToBeRemoved = [NSMutableArray array];
@@ -134,30 +138,15 @@
         [self.tableView endUpdates];
 
     }
-
-}
-
--(void) hide:(BOOL)hide formRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [self hide:hide formRowsAtIndexPaths:[NSSet setWithArray:@[indexPath]]];
-}
-
--(void) hide:(BOOL)hide formRowsAtIndexPaths:(NSSet *)indexPathsSet
-{
     
-    for (NSIndexPath *indexPath in indexPathsSet) {
-        FWTSectionConfiguration *section = [self visibleSectionConfigurationWithIndex:indexPath.section];
-        NSArray *cellsConfiguration = section.cellsConfiguration;
-        FWTCellConfiguration *cellConfiguration = [cellsConfiguration objectAtIndex:indexPath.row];
-        if (cellConfiguration.dynamicCellKey != nil) {
-            NSAssert(NO, @"Dynamic Cell Configuration Description Can't be hidden");
-        }
-        cellConfiguration.hidden = hide;
-        cellConfiguration.visibleCellTableViewIndexPath = hide ? nil : [NSIndexPath indexPathForRow:[section.visibleCells indexOfObject:cellConfiguration] inSection:indexPath.section];
-    }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wselector"
+    [self.formConfiguration makeObjectsPerformSelector:@selector(updateTableViewIndexPathesForVisibleCells)];
+#pragma clang diagnostic pop
 
-    
 }
+
+
 
 -(void) hide:(BOOL)hide formSection:(NSUInteger)section
 {
@@ -172,7 +161,6 @@
          FWTSectionConfiguration *sectionConfig = [strongSelf.formConfiguration objectAtIndex:idx];
          sectionConfig.hidden = hide;
      }];
-      
 }
 
 // sections
@@ -283,6 +271,20 @@
     return nil;
 }
 
+- (NSIndexPath *) visibleAuxilaryRowIndexPathInSection:(NSInteger) section {
+   
+    FWTSectionConfiguration *sectionConfiguration;
+    if (section < [self.formConfiguration count]) {
+        sectionConfiguration = [self visibleSectionConfigurationWithIndex:section];
+    }
+    
+    if (sectionConfiguration) {
+        return [sectionConfiguration visibleAuxilaryRowIndexPath];
+    }
+    
+    return nil;
+}
+
 
 #pragma mark - Private
 
@@ -326,7 +328,10 @@
     for (NSDictionary *cellConfig in sectionDescription[FWTCellsConfigurationKey]) {
         NSUInteger rowIndex = [sectionDescription[FWTCellsConfigurationKey] indexOfObject:cellConfig];
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:rowIndex inSection:sectionIndex];
-        [cellsConfigurationArray addObject:[self _cellConfigurationWithDescription:cellConfig indexPath:indexPath]];
+        FWTCellConfiguration *cellConfiguration = [self _cellConfigurationWithDescription:cellConfig indexPath:indexPath];
+        if ([[cellsConfigurationArray lastObject] isAuxiliaryRowActivator]) cellConfiguration.isAuxiliaryRow = YES;
+        
+        [cellsConfigurationArray addObject:cellConfiguration];
     }
     
     FWTSectionConfiguration *section = [[FWTSectionConfiguration alloc] initWithCellsConfiguration:cellsConfigurationArray sectionIndex:sectionIndex];

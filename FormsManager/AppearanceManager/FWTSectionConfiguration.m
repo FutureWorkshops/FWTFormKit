@@ -142,6 +142,23 @@
 
 }
 
+-(void) updateTableViewIndexPathesForVisibleCells {
+    
+    for (FWTCellConfiguration *cellConfiguration in self.visibleCells) {
+        cellConfiguration.visibleCellTableViewIndexPath = [NSIndexPath indexPathForRow:[self.visibleCells indexOfObject:cellConfiguration] inSection:cellConfiguration.indexPath.section];
+    }
+    
+}
+
+-(NSIndexPath *) visibleAuxilaryRowIndexPath
+{
+    NSPredicate *notHiddenCellsPredicate = [NSPredicate predicateWithFormat:@"(hidden != %@) AND (isAuxiliaryRow = %@)", [NSNumber numberWithBool:YES], [NSNumber numberWithBool:YES]];
+    NSArray *auxilaryRow = [self.visibleCells filteredArrayUsingPredicate:notHiddenCellsPredicate];
+    FWTCellConfiguration *cellConfiguration = [auxilaryRow lastObject];
+    cellConfiguration.visibleCellTableViewIndexPath = [NSIndexPath indexPathForRow:[self.visibleCells indexOfObject:cellConfiguration] inSection:cellConfiguration.indexPath.section];
+    return cellConfiguration.visibleCellTableViewIndexPath;
+}
+
 #pragma mark - Private
 
 -(FWTCellConfiguration *) _dynamicCellConfigurationForRange:(NSRange) range
@@ -159,12 +176,6 @@
     return [[self.cellsConfiguration filteredArrayUsingPredicate:dynamicCells] count];
 }
 
--(void) updateTableViewIndexPathesForVisibleCells {
-    
-    for (FWTCellConfiguration *cellConfiguration in self.visibleCells) {
-        cellConfiguration.visibleCellTableViewIndexPath = [NSIndexPath indexPathForRow:[self.visibleCells indexOfObject:cellConfiguration] inSection:cellConfiguration.indexPath.section];
-    }
-    
-}
+
 
 @end

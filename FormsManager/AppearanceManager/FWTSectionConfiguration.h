@@ -46,6 +46,8 @@
 
 - (NSSet *) indexPathsForFormRows;
 - (NSSet *) indexPathsForVisibleFormRows;
+- (NSIndexPath *) visibleAuxilaryRowIndexPath; // return auxilary row index path in the tableView.
+
 
 -(NSUInteger) numberOfVisibleCellInSection;
 -(void) updateTableViewIndexPathesForVisibleCells; //update visible cell indexpathes. This index pathes are correlated to index pathes in the table view.
