@@ -21,6 +21,7 @@
 @property (nonatomic) NSString *placeholderText;
 @property (nonatomic) UIImage *accessoryViewImage;;
 @property (nonatomic) BOOL isAuxiliaryRowActivator;
+@property (nonatomic) BOOL isAuxiliaryRow;
 @property (nonatomic) BOOL isObservable;
 @property (nonatomic) id <FWTInputFormatterWithNumberFormatterProtocol> inputFormatter;
 @property (nonatomic) id inputValidator;

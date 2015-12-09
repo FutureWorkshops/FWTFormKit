@@ -13,7 +13,7 @@
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"Identifier : %@ , IndexPath:%@, tableViewIndexPath: %@ hidden = %u, DynamicKey=%@", self.identifier, self.indexPath, self.visibleCellTableViewIndexPath, self.hidden, self.dynamicCellKey];
+    return [NSString stringWithFormat:@"Identifier : %@ , IndexPath:%@, tableViewIndexPath: %@ hidden = %u, DynamicKey=%@, isAuxilaryActivator = %d, isAuxilaryRow = %d", self.identifier, self.indexPath, self.visibleCellTableViewIndexPath, self.hidden, self.dynamicCellKey, self.isAuxiliaryRowActivator, self.isAuxiliaryRow];
 }
 
 @end
