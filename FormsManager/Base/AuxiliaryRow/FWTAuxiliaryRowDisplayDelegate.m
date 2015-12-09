@@ -38,25 +38,25 @@
 
 -(void) displayInlineAuxiliaryRowForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSIndexPath *visibleAuxilaryRowIndexPath = [self.appearanceManager visibleAuxilaryRowIndexPathInSection:indexPath.section];
     
     [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
         [self.tableView beginUpdates];
         
         BOOL before = NO;   // indicates if the AuxiliaryRow is below "indexPath", help us determine which row to reveal
-        if ([self _hasInlineAuxiliaryRow])
+        
+      
+        if (visibleAuxilaryRowIndexPath != nil)
         {
-            before = self.opendAuxiliaryRowIndexPath.row < indexPath.row;
+            before = visibleAuxilaryRowIndexPath.row < indexPath.row;
         }
         
-        BOOL sameCellClicked = (self.opendAuxiliaryRowIndexPath.row - 1 == indexPath.row);
+        BOOL sameCellClicked = (visibleAuxilaryRowIndexPath.row - 1 == indexPath.row);
         
-        if ([self _hasInlineAuxiliaryRow])
+        if (visibleAuxilaryRowIndexPath)
         {
-            NSIndexPath *auxiliaryRowIndexPath = [NSIndexPath indexPathForRow:self.opendAuxiliaryRowIndexPath.row inSection:self.opendAuxiliaryRowIndexPath.section];
-            FWTCellConfiguration *cellConfiguration  = [self.appearanceManager visibleCellConfigurationForIndexPath:auxiliaryRowIndexPath];
-            [self.appearanceManager hide:YES formRowAtIndexPath:cellConfiguration.indexPath];
-            [self.tableView deleteRowsAtIndexPaths:@[auxiliaryRowIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            self.opendAuxiliaryRowIndexPath = nil;
+            FWTCellConfiguration *cellConfiguration  = [self.appearanceManager visibleCellConfigurationForIndexPath:visibleAuxilaryRowIndexPath];
+            [self.appearanceManager removeRowsAtIndexPaths:@[cellConfiguration.indexPath]];
         }
         
         if (!sameCellClicked)
@@ -65,16 +65,13 @@
             NSInteger rowToReveal = (before ? indexPath.row - 1 : indexPath.row);
             NSIndexPath *indexPathToReveal = [NSIndexPath indexPathForRow:rowToReveal inSection:0];
             
-            
             [self _toggleAuxiliaryRowWithAtIndexPath:indexPathToReveal];
-            self.opendAuxiliaryRowIndexPath = [NSIndexPath indexPathForRow:indexPathToReveal.row + 1 inSection:0];
-            
             
         }
         [self.tableView endUpdates];
         
     } completion:^(BOOL finished) {
-        if (self.opendAuxiliaryRowIndexPath) {
+        if ([self _visibleAuxilaryRowIndexPathForSection:indexPath.section]!= nil) {
             [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
         }
     }];
@@ -85,44 +82,32 @@
     
 }
 
+-(NSIndexPath *) _visibleAuxilaryRowIndexPathForSection:(NSUInteger) section
+{
+    return [self.appearanceManager visibleAuxilaryRowIndexPathInSection:section];
+}
 
 - (BOOL) _existAuxiliaryRowForIndexPath:(NSIndexPath *)indexPath
 {
-    BOOL hasDatePicker = NO;
+    FWTCellConfiguration *cellConfiguration =[self.appearanceManager visibleCellConfigurationForIndexPath:indexPath];
     
-    NSInteger targetedRow = indexPath.row;
-    targetedRow++;
-    
-    UITableViewCell *checkDatePickerCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:targetedRow inSection:0]];
-    hasDatePicker = [checkDatePickerCell isKindOfClass:[FWTPickerRow class]];
-    
-    return hasDatePicker;
+    return cellConfiguration.isAuxiliaryRow;
 }
 
-- (BOOL) _hasInlineAuxiliaryRow
-{
-    return (self.opendAuxiliaryRowIndexPath != nil);
-}
 
 -(void) _toggleAuxiliaryRowWithAtIndexPath:(NSIndexPath *) indexPath
 {
     
-    NSArray *auxiliaryRowTableViewIndexPaths = @[[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section]];
     FWTCellConfiguration *cellConfiguration  = [self.appearanceManager visibleCellConfigurationForIndexPath:indexPath];
-    NSArray *auxiliaryRowFormDescriptionIndexPaths =@[[NSIndexPath indexPathForRow:cellConfiguration.indexPath.row + 1 inSection:cellConfiguration.indexPath.section]];
-    
+    NSArray *auxiliaryRowTableViewIndexPaths = @[[NSIndexPath indexPathForRow:cellConfiguration.indexPath.row + 1 inSection:cellConfiguration.indexPath.section]];
+
     if ([self _existAuxiliaryRowForIndexPath:indexPath])
     {
-        [self.appearanceManager hide:YES formRowsAtIndexPaths:[NSSet setWithArray:auxiliaryRowFormDescriptionIndexPaths]];
-        [self.tableView deleteRowsAtIndexPaths:auxiliaryRowTableViewIndexPaths
-                              withRowAnimation:UITableViewRowAnimationFade];
+        [self.appearanceManager removeRowsAtIndexPaths:auxiliaryRowTableViewIndexPaths];
     }
     else
     {
-        [self.appearanceManager hide:NO formRowsAtIndexPaths:[NSSet setWithArray:auxiliaryRowFormDescriptionIndexPaths]];
-        
-        [self.tableView insertRowsAtIndexPaths:auxiliaryRowTableViewIndexPaths
-                              withRowAnimation:UITableViewRowAnimationFade];
+        [self.appearanceManager addRowsAtIndexPaths:auxiliaryRowTableViewIndexPaths];
 
     }
 }
