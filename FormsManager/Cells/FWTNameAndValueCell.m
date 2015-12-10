@@ -75,7 +75,6 @@
             if ([self.inputFormatter formatInputText:replaced]) {
                 self.valueTextField.text = [self.inputFormatter formattedString];
             }
-
             return NO;
         } else if ([self.inputFormatter respondsToSelector:@selector(formatText:withReplacedCharacter:inRange:)])
         {
@@ -85,32 +84,35 @@
             return NO;
         }
     }
+    if ([self.inputErrorDelegate conformsToProtocol:@protocol(FWTCellValidationErrorDelegate)]) {
+        
+        if ([self.inputErrorDelegate restricInputBaseOnValidationRuleForCell:self]) {
+            if (![self _validateInput:replaced]) {
+                return NO;
+            } else
+            {
+                self.valueTextField.text = replaced;
+                return NO;
+            }
+        }
+    }
     self.valueTextField.text = replaced;
-    return NO;
+    return YES;
 }
 
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    id value = nil;
-    if ([self.inputValidator conformsToProtocol:@protocol(FWTValidationProtocol)]) {
-        NSNumberFormatter *formatter = [self.inputFormatter numberFormatter];
-        if (formatter) {
-            value = [formatter numberFromString:textField.text];
-        } else {
-            value = textField.text;
+    if (![self _validateInput:textField.text]) {
+        if ([self.inputErrorDelegate conformsToProtocol:@protocol(FWTCellValidationErrorDelegate)]) {
+            [self.inputErrorDelegate validationStatus:FWTInputValidationStatusIsInvalid inCell:self];
         }
-        
-        if (![self.inputValidator isValidInputValue:value]) {
-            if ([self.inputErrorDelegate conformsToProtocol:@protocol(FWTCellValidationErrorDelegate)]) {
-                [self.inputErrorDelegate validationStatus:FWTInputValidationStatusIsInvalid inCell:self];
-            }
-        } else {
-            if ([self.inputErrorDelegate conformsToProtocol:@protocol(FWTCellValidationErrorDelegate)]) {
-                [self.inputErrorDelegate validationStatus:FWTInputValidationStatusIsValid inCell:self];
-            }
+    } else {
+        if ([self.inputErrorDelegate conformsToProtocol:@protocol(FWTCellValidationErrorDelegate)]) {
+            [self.inputErrorDelegate validationStatus:FWTInputValidationStatusIsValid inCell:self];
         }
     }
+    
 }
 
 #pragma mark - FWTTextFieldResponderProtocol
@@ -122,7 +124,21 @@
     return @[[NSNumber numberWithInteger:self.valueTextField.tag]];
 }
 
-
+-(BOOL) _validateInput:(NSString *) string
+{
+    id value = nil;
+    if ([self.inputValidator conformsToProtocol:@protocol(FWTValidationProtocol)]) {
+        NSNumberFormatter *formatter = [self.inputFormatter numberFormatter];
+        if (formatter) {
+            value = [formatter numberFromString:string];
+        } else {
+            value = string;
+        }
+        
+        return [self.inputValidator isValidInputValue:value];
+    }
+    return NO;
+}
 
 @end
 

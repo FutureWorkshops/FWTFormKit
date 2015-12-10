@@ -18,6 +18,6 @@ typedef NS_ENUM(NSInteger , FWTInputValidationStatus) {
 
 -(UIColor *) textColorForErrorInCell:(UITableViewCell *) cell;
 -(void) validationStatus:(FWTInputValidationStatus) inputValidationStatus inCell:(UITableViewCell *) cell;
-
+-(BOOL) restricInputBaseOnValidationRuleForCell:(UITableViewCell *) cell;
 
 @end
