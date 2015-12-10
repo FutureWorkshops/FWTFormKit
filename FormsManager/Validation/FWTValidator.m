@@ -19,12 +19,11 @@
 
 @implementation FWTValidator
 
--(instancetype) initWithValidationRules:(NSArray *) validationRules numberFormatter:(NSNumberFormatter *) numberFormatter
+-(instancetype) initWithValidationRules:(NSArray *) validationRules
 {
     self = [super init];
     if (self) {
         self.validationRules = validationRules;
-        self.numberFormatter = numberFormatter;
     }
     
     return self;

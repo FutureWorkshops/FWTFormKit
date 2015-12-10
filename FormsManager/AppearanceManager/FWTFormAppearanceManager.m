@@ -376,8 +376,7 @@
     
     if (cellDescription[FWTCellInputValidationRules]) {
         cell.validationRules = cellDescription[FWTCellInputValidationRules];
-        NSNumberFormatter *cellNumberFormatter = [cell.inputFormatter numberFormatter];
-        cell.inputValidator = [[FWTValidator alloc] initWithValidationRules:cell.validationRules numberFormatter:cellNumberFormatter];
+        cell.inputValidator = [[FWTValidator alloc] initWithValidationRules:cell.validationRules];
     }
     
     return cell;

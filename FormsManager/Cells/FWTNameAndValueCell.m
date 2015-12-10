@@ -85,16 +85,23 @@
             return NO;
         }
     }
-    
-    return YES;
+    self.valueTextField.text = replaced;
+    return NO;
 }
 
 
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
+    id value = nil;
     if ([self.inputValidator conformsToProtocol:@protocol(FWTValidationProtocol)]) {
         NSNumberFormatter *formatter = [self.inputFormatter numberFormatter];
-        if (![self.inputValidator isValidInputValue:[formatter numberFromString:textField.text]]) {
+        if (formatter) {
+            value = [formatter numberFromString:textField.text];
+        } else {
+            value = textField.text;
+        }
+        
+        if (![self.inputValidator isValidInputValue:value]) {
             if ([self.inputErrorDelegate conformsToProtocol:@protocol(FWTCellValidationErrorDelegate)]) {
                 [self.inputErrorDelegate validationStatus:FWTInputValidationStatusIsInvalid inCell:self];
             }

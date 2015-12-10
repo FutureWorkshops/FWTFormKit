@@ -11,6 +11,6 @@
 
 @interface FWTValidator : NSObject <FWTValidationProtocol>
 
--(instancetype) initWithValidationRules:(NSArray *) validationRules numberFormatter:(NSNumberFormatter *)numberFormatter;
+-(instancetype) initWithValidationRules:(NSArray *) validationRules;
 
 @end
