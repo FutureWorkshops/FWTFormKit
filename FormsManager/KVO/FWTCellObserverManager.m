@@ -36,7 +36,7 @@
     id observerDelegate = self.observerDelegate;
     
     if ([observerDelegate conformsToProtocol:@protocol(FWTObserverDelegate)]) {
-        [observerDelegate observeValueForKeyPath:observer.keyPath ofObject:observer.subject change:change];
+        [observerDelegate formValueDidChangedForKeyPath:observer.keyPath ofObject:observer.subject change:change];
     }
 }
 

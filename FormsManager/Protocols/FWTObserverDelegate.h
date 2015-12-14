@@ -10,7 +10,7 @@
 
 @protocol FWTObserverDelegate <NSObject>
 
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change;
+-(void)formValueDidChangedForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change;
 
 
 @end
