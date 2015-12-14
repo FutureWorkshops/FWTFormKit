@@ -33,6 +33,8 @@
 // Validation and Formatter
 
 @property (nonatomic) id <FWTInputFormatterWithNumberFormatterProtocol> inputFormatter;
+@property (nonatomic) NSNumberFormatter *outputFormatter;
+
 @property (nonatomic) id inputValidator;
 @property (nonatomic) NSArray *validationRules;
 @property (nonatomic) FWTInputValidationStatus validationStatus;

@@ -20,6 +20,8 @@ NSString * const FWTCellIsHiddenKey = @"FWTCellIsHiddenKey";
 NSString * const FWTCellIsAuxiliaryRowActivator = @"FWTCellIsAuxiliaryRowActivator";
 NSString * const FWTCellIsObservable = @"FWTCellIsObservable";
 NSString * const FWTCellInputFormatter =@"FWTCellInputFormatter";
+NSString * const FWTCellOutputFormatter =@"FWTCellOutputFormatter";
+
 NSString * const FWTCellInputValidationRules =@"FWTCellInputValidationRules";
 
 

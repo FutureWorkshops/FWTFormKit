@@ -374,6 +374,10 @@
         cell.inputFormatter = cellDescription[FWTCellInputFormatter];
     }
     
+    if (cellDescription[FWTCellOutputFormatter]) {
+        cell.outputFormatter = cellDescription[FWTCellOutputFormatter];
+    }
+    
     if (cellDescription[FWTCellInputValidationRules]) {
         cell.validationRules = cellDescription[FWTCellInputValidationRules];
         cell.inputValidator = [[FWTValidator alloc] initWithValidationRules:cell.validationRules];
