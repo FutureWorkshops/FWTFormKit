@@ -29,11 +29,8 @@
 @property (nonatomic) FWTCellObserverManager *observerManager;
 
 -(instancetype)initWithFormDescriptionDataSource:(id<FWTFormDescriptionProtocol>)formDescriptionDataSource formDescriptionKey:(NSString *) formDesctiptionKey;
--(instancetype)initWithFormDescription:(id<FWTFormDescriptionProtocol>)formDescriptionDataSource;
-
 
 -(void)setFormDescriptionDataSource:(id<FWTFormDescriptionProtocol>) formDescriptionDataSource;
-
 
 // do not need to call super when ovveride this method
 -(NSAttributedString *) attributedTextForHeaderInSection:(NSInteger) section;
