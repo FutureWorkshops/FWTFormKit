@@ -58,7 +58,7 @@
 
 - (instancetype)initWithFormDescription:(id<FWTFormDescriptionProtocol>)formDescriptionDataSource
 {
-    self = [super initWithStyle:UITableViewStylePlain];
+    self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         self.formDescriptionDataSource = formDescriptionDataSource;
     }
