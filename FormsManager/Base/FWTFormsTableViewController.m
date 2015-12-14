@@ -48,23 +48,21 @@
 
 -(instancetype)initWithFormDescriptionDataSource:(id<FWTFormDescriptionProtocol>)formDescriptionDataSource formDescriptionKey:(NSString *)formDesctiptionKey
 {
-    self = [self initWithFormDescription:formDescriptionDataSource];
+    self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         self.formDescriptionKey = formDesctiptionKey;
+        self.formDescriptionDataSource = formDescriptionDataSource;
+
+        if ([self conformsToProtocol:@protocol(FWTFormDescriptionKeyProtocol)]) {
+            NSDictionary *cellsConfigurationDictionary = [self.formDescriptionDataSource formDescriptionForKey:self.formDescriptionKey];
+            self.appearanceManager = [[FWTFormAppearanceManager alloc] initWithTableView:self.tableView formConfigurationDictionary:cellsConfigurationDictionary];
+            self.appearanceManager.dynamicFormDataSource = self;
+        }
     }
     
     return self;
 }
 
-- (instancetype)initWithFormDescription:(id<FWTFormDescriptionProtocol>)formDescriptionDataSource
-{
-    self = [super initWithStyle:UITableViewStyleGrouped];
-    if (self) {
-        self.formDescriptionDataSource = formDescriptionDataSource;
-    }
-    
-     return self;
-}
 
 - (void)viewDidLoad
 {
@@ -102,20 +100,6 @@
 
 #pragma mark -Accessors
 
--(void)setFormDescriptionDataSource:(id<FWTFormDescriptionProtocol>) formDescriptionDataSource
-{
-    NSAssert(self.formDescriptionKey, @"formDescriptionKey must be set before setDescriptionDataSource");
-    
-    if (self->_formDescriptionDataSource != formDescriptionDataSource) {
-        self->_formDescriptionDataSource = formDescriptionDataSource;
-    
-        if ([self conformsToProtocol:@protocol(FWTFormDescriptionKeyProtocol)]) {
-            NSDictionary *cellsConfigurationDictionary = [self.formDescriptionDataSource formDescriptionForKey:self.formDescriptionKey];
-            self.appearanceManager = [[FWTFormAppearanceManager alloc] initWithTableView:self.tableView formConfigurationDictionary:cellsConfigurationDictionary];
-            self.appearanceManager.dynamicFormDataSource = self;
-        }
-    }
-}
 
 -(void)setObserverDelegate:(id<FWTObserverDelegate>)observerDelegate
 {
@@ -295,7 +279,7 @@
     FWTCellConfiguration *cellConfiguration = [self.appearanceManager visibleCellConfigurationForIndexPath:indexPath];
     id nextViewController = nil;
     if ([cellConfiguration.nextViewControllerClass isSubclassOfClass:[self class]]) {
-        nextViewController = [[cellConfiguration.nextViewControllerClass alloc] initWithFormDescription:self.formDescriptionDataSource];
+        nextViewController = [[cellConfiguration.nextViewControllerClass alloc] initWithFormDescriptionDataSource:self.formDescriptionDataSource formDescriptionKey:nil];
     }
     
     return nextViewController;
