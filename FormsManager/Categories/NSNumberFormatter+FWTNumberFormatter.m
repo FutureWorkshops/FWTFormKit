@@ -84,10 +84,9 @@
     
     dispatch_once(&onceToken, ^{
         _numberFormatter = [[self class] _numberFormatterWithPercantageFormatterBehaviour];;
-        _numberFormatter.percentSymbol = @"%";
-
+        
     });
-    
+    _numberFormatter.percentSymbol = @"%";
     return _numberFormatter;
 
 }
@@ -119,7 +118,7 @@
     
     _numberFormatter = [[NSNumberFormatter alloc] init];
     [_numberFormatter setNumberStyle: NSNumberFormatterPercentStyle];
-    _numberFormatter.maximumFractionDigits = 0;
+    _numberFormatter.maximumFractionDigits = 2;
     _numberFormatter.usesGroupingSeparator = NO;
     [_numberFormatter setGeneratesDecimalNumbers:NO];
     _numberFormatter.multiplier = @1;
