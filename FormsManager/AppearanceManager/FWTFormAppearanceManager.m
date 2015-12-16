@@ -317,6 +317,24 @@
        [formConfiguration addObject:[self _sectionConfigurationWithDescription:sectionConfig sectionIndex:sectionIndex]];
     }
     
+    if ([formConfiguration count] > 1) {
+        
+        NSArray *sortedArray = [formConfiguration sortedArrayUsingComparator:^NSComparisonResult(FWTSectionConfiguration * _Nonnull obj1, FWTSectionConfiguration *  _Nonnull obj2) {
+            
+            NSUInteger r1 = obj1.index;
+            NSUInteger r2 = obj2.index;
+            if (r1 > r2) {
+                return (NSComparisonResult)NSOrderedDescending;
+            }
+            if (r1 < r2) {
+                return (NSComparisonResult)NSOrderedAscending;
+            }
+            return (NSComparisonResult)NSOrderedSame;
+            
+        }];
+        return sortedArray;
+    }
+    
     return formConfiguration;
 }
 
