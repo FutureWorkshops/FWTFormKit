@@ -23,7 +23,7 @@
 +(instancetype) inputFormatterWithCustomSymbol:(NSString *) customSymbol
 {
     FWTCustomSymbollnputFormatter *inputFormatter  = [FWTCustomSymbollnputFormatter new];
-    inputFormatter.numberFormatter = [inputFormatter numberFormatter];
+    inputFormatter.numberFormatter = [NSNumberFormatter numberFormatterWithCustomSymbol:customSymbol];
     inputFormatter.numberFormatter.percentSymbol= customSymbol;
     return inputFormatter;
 }
@@ -36,14 +36,6 @@
     return inputFormatter;
 }
 
--(NSNumberFormatter *) numberFormatter
-{
-    if (!_numberFormatter) {
-        _numberFormatter = [NSNumberFormatter numberFormatterWithPercentageSymbol];
-    }
-    
-    return _numberFormatter;
-}
 
 -(BOOL)formatText:(NSString *)string withReplacedCharacter:(NSString *) character inRange:(NSRange)range{
     
