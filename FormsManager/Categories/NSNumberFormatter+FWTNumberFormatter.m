@@ -98,7 +98,14 @@
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
-        _numberFormatter = [[self class] _numberFormatterWithPercantageFormatterBehaviour];;
+        
+        _numberFormatter = [[NSNumberFormatter alloc] init];
+        [_numberFormatter setNumberStyle: NSNumberFormatterPercentStyle];
+        _numberFormatter.maximumFractionDigits = 1;
+        _numberFormatter.usesGroupingSeparator = NO;
+        [_numberFormatter setGeneratesDecimalNumbers:NO];
+        _numberFormatter.multiplier = @1;
+        _numberFormatter.maximum = @10000;
         
     });
     
@@ -118,10 +125,10 @@
     
     _numberFormatter = [[NSNumberFormatter alloc] init];
     [_numberFormatter setNumberStyle: NSNumberFormatterPercentStyle];
-    _numberFormatter.maximumFractionDigits = 2;
+    _numberFormatter.maximumFractionDigits = 1;
     _numberFormatter.usesGroupingSeparator = NO;
     [_numberFormatter setGeneratesDecimalNumbers:NO];
-    _numberFormatter.multiplier = @1;
+    _numberFormatter.multiplier = @100;
     _numberFormatter.maximum = @10000;
    
     return _numberFormatter;
