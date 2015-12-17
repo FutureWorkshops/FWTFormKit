@@ -97,6 +97,26 @@
 }
 
 
+-(void) setHidden:(BOOL) hidden formRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self setHidden:hidden formRowsAtIndexPaths:[NSSet setWithArray:@[indexPath]]];
+}
+
+-(void) setHidden:(BOOL) hidden formRowsAtIndexPaths:(NSSet *)indexPathsSet
+{
+    for (NSIndexPath *indexPath in indexPathsSet) {
+        FWTSectionConfiguration *section = [self visibleSectionConfigurationWithIndex:indexPath.section];
+        [section hideCells:hidden withIndexPaths:[NSSet setWithArray:@[indexPath]]];
+        NSArray *cellsConfiguration = section.cellsConfiguration;
+        FWTCellConfiguration *cellConfiguration = [cellsConfiguration objectAtIndex:indexPath.row];
+        if (cellConfiguration.dynamicCellKey != nil) {
+            NSAssert(NO, @"Dynamic Cell Configuration Description Can't be hidden");
+        }
+        cellConfiguration.hidden = hidden;
+        cellConfiguration.visibleCellTableViewIndexPath = hidden ? nil : [NSIndexPath indexPathForRow:[section.visibleCells indexOfObject:cellConfiguration] inSection:indexPath.section];
+    }
+}
+
 
 -(void) removeRowsAtIndexPaths:(NSArray *) indexPaths {
     

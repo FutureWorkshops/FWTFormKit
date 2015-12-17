@@ -31,6 +31,9 @@
 - (void) hide:(BOOL) hide formSection:(NSUInteger) section;
 - (void) hide:(BOOL) hide formSections:(NSIndexSet *) sections;
 
+-(void) setHidden:(BOOL) hidden formRowAtIndexPath:(NSIndexPath *)indexPath;
+-(void) setHidden:(BOOL) hidden formRowsAtIndexPaths:(NSSet *)indexPathsSet;
+
 
 // dataSource
 - (FWTSectionConfiguration *) visibleSectionConfigurationWithIndex:(NSUInteger) sectionIndex;
