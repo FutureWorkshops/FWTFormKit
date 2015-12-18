@@ -12,11 +12,18 @@
 #import "FWTCellConfiguration.h"
 #import "FWTDynamicFormDatasourceProtocol.h"
 
+@protocol FWTFormAppearanceManagerDelegate <NSObject>
+
+-(void) formManagerWillRemoveRowWithConfiguration:(FWTCellConfiguration *) cellConfiguration;
+-(void) formManagerWillAddRowWithConfiguration:(FWTCellConfiguration *) cellConfiguration;
+
+@end
 
 @interface FWTFormAppearanceManager : NSObject
 
 @property (nonatomic,readonly) NSDictionary *formConfigurationDictionary;
 @property (nonatomic, weak) id <FWTDynamicFormDatasourceProtocol> dynamicFormDataSource;
+@property (nonatomic, weak) id <FWTFormAppearanceManagerDelegate> delegate;
 
 -(instancetype) initWithFormConfigurationDictionary:(NSDictionary *) formConfigurationDictionary;
 -(instancetype) initWithTableView:(UITableView *)tableView formConfigurationDictionary:(NSDictionary *)formConfigurationDictionary;

@@ -74,7 +74,11 @@
         if (!cellConfiguration.hidden) {
             continue;
         } else {
-            
+            id delegate = self.delegate;
+            if  ([delegate conformsToProtocol:@protocol(FWTFormAppearanceManagerDelegate)]) {
+                [delegate formManagerWillAddRowWithConfiguration:cellConfiguration];
+            }
+
             cellConfiguration.hidden = NO;
             NSIndexPath *tableViewIndexPath = [NSIndexPath indexPathForRow:[section.visibleCells indexOfObject:cellConfiguration] inSection:indexPath.section];
             cellConfiguration.visibleCellTableViewIndexPath = tableViewIndexPath;
@@ -146,6 +150,12 @@
             if (cellConfiguration.dynamicCellKey != nil) {
                 NSAssert(NO, @"Dynamic Cell Configuration Description Can't be hidden");
             }
+            
+            id delegate = self.delegate;
+            if  ([delegate conformsToProtocol:@protocol(FWTFormAppearanceManagerDelegate)]) {
+                [delegate formManagerWillRemoveRowWithConfiguration:cellConfiguration];
+            }
+        
             cellConfiguration.hidden = YES;
             [rowsToBeRemoved addObject:cellConfiguration.visibleCellTableViewIndexPath];
             cellConfiguration.visibleCellTableViewIndexPath = nil;
