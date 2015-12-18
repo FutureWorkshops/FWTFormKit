@@ -14,6 +14,7 @@
 
 @protocol FWTFormAppearanceManagerDelegate <NSObject>
 
+@optional
 -(void) formManagerWillRemoveRowWithConfiguration:(FWTCellConfiguration *) cellConfiguration;
 -(void) formManagerWillAddRowWithConfiguration:(FWTCellConfiguration *) cellConfiguration;
 
