@@ -75,7 +75,7 @@
             continue;
         } else {
             id delegate = self.delegate;
-            if  ([delegate conformsToProtocol:@protocol(FWTFormAppearanceManagerDelegate)]) {
+            if  ([delegate respondsToSelector:@selector(formManagerWillAddRowWithConfiguration:)]) {
                 [delegate formManagerWillAddRowWithConfiguration:cellConfiguration];
             }
 
@@ -152,7 +152,7 @@
             }
             
             id delegate = self.delegate;
-            if  ([delegate conformsToProtocol:@protocol(FWTFormAppearanceManagerDelegate)]) {
+            if  ([delegate respondsToSelector:@selector(formManagerWillRemoveRowWithConfiguration:)]) {
                 [delegate formManagerWillRemoveRowWithConfiguration:cellConfiguration];
             }
         
