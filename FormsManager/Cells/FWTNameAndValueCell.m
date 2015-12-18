@@ -70,6 +70,8 @@
 {
     
     NSString *replaced = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    replaced =[replaced stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
     if ([self.inputFormatter conformsToProtocol:@protocol(FWTStringFormatterProtocol)]) {
         if ([self.inputFormatter respondsToSelector:@selector(formatInputText:)]) {
             if ([self.inputFormatter formatInputText:replaced]) {
@@ -85,7 +87,7 @@
         }
     }
     if ([self.inputErrorDelegate conformsToProtocol:@protocol(FWTCellValidationErrorDelegate)]) {
-        
+
         if ([self.inputErrorDelegate restricInputBaseOnValidationRuleForCell:self]) {
             if (![self _validateInput:replaced]) {
                 return NO;

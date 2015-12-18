@@ -50,6 +50,8 @@
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSString *replaced = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    replaced =[replaced stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
     if (replaced.length < 50) {
         return YES;
     }
