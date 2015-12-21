@@ -101,7 +101,6 @@
         
         _numberFormatter = [[NSNumberFormatter alloc] init];
         [_numberFormatter setNumberStyle: NSNumberFormatterPercentStyle];
-        _numberFormatter.maximumFractionDigits = 1;
         _numberFormatter.usesGroupingSeparator = NO;
         [_numberFormatter setGeneratesDecimalNumbers:NO];
         _numberFormatter.multiplier = @1;
@@ -125,7 +124,8 @@
     
     _numberFormatter = [[NSNumberFormatter alloc] init];
     [_numberFormatter setNumberStyle: NSNumberFormatterPercentStyle];
-    _numberFormatter.maximumFractionDigits = 1;
+    _numberFormatter.maximumFractionDigits = 2;
+    _numberFormatter.minimumFractionDigits = 2;
     _numberFormatter.usesGroupingSeparator = NO;
     [_numberFormatter setGeneratesDecimalNumbers:NO];
     _numberFormatter.multiplier = @100;
