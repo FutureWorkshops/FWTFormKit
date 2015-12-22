@@ -13,7 +13,7 @@
 
 @required
 @property (nonatomic) id <FWTTextFieldResponderChainHandlerProtocol> textFieldResponderChainHandler;
-- (NSArray *) textFieldRespondersTags;
+- (UITextField *) nextTextFieldResponder;
 - (BOOL) shoudRegisterAsTextResponder;
 
 

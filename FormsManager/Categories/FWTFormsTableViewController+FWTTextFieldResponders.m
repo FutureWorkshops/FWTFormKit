@@ -15,40 +15,39 @@
 {
     id <FWTTextFieldResponderProtocol> textFieldCell = (id <FWTTextFieldResponderProtocol>) cell;
     if ([textFieldCell shoudRegisterAsTextResponder]) {
-        textFieldCell.textFieldResponderChainHandler = self;
-        for (NSNumber *tag in [textFieldCell textFieldRespondersTags]) {
-            [self _registerNextResponderViewTag:tag withIndexPath:indexPath];
-        }
+//        textFieldCell.textFieldResponderChainHandler = self;
+        [self _registerNextResponder:[textFieldCell nextTextFieldResponder] forCell:cell];
     }
 }
 
 #pragma mark - FWTTextFieldResponderChainHandlerProtocol
 
--(void) nextResponderForCell:(UITableViewCell *)cell textViewWithTag:(NSUInteger) textViewTag
+-(void) nextResponderForCell:(UITableViewCell *)cell
 {
-    NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-    
-    NSDictionary *nextResponderDictionary = [self _indexForNextResponderAtIndexPath:cellIndexPath withTag:textViewTag];
-    NSIndexPath *nextResponderIndexPath  = [[nextResponderDictionary allKeys] lastObject];
-    UITableViewCell *nextResponderCell = nil;
-    UITextField *nextResponderTextField=nil;
-    
-    nextResponderCell = [self.tableView cellForRowAtIndexPath:nextResponderIndexPath];
-    
-    if (nextResponderCell) {
-        if ([nextResponderCell conformsToProtocol:@protocol(FWTTextFieldResponderProtocol)]) {
-            [self.tableView scrollToRowAtIndexPath:nextResponderIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-            nextResponderTextField = (UITextField *)[nextResponderCell viewWithTag:[[nextResponderDictionary objectForKey:nextResponderIndexPath] integerValue]];
-            [nextResponderTextField becomeFirstResponder];
-        }
-    }
+//
+//    id nextResponder  = [self.textFieldResponders ]
+//    NSIndexPath *nextResponderIndexPath  = [[nextResponderDictionary allKeys] lastObject];
+//    UITableViewCell *nextResponderCell = nil;
+//    UITextField *nextResponderTextField=nil;
+//    
+//    nextResponderCell = [self.tableView cellForRowAtIndexPath:nextResponderIndexPath];
+//    
+//    if (nextResponderCell) {
+//        if ([nextResponderCell conformsToProtocol:@protocol(FWTTextFieldResponderProtocol)]) {
+//            [self.tableView scrollToRowAtIndexPath:nextResponderIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+//            nextResponderTextField = (UITextField *)[nextResponderCell viewWithTag:[[nextResponderDictionary objectForKey:nextResponderIndexPath] integerValue]];
+//            [nextResponderTextField becomeFirstResponder];
+//        }
+//    }
 }
 
--(BOOL) haveNextResponderTextFieldWithTag:(NSUInteger) textViewTag inCell:(UITableViewCell *) cell
+-(BOOL) haveNextResponderForCell:(UITableViewCell *)cell
 {
-    NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-    NSDictionary *nextResponderDictionary = [self _indexForNextResponderAtIndexPath:cellIndexPath withTag:textViewTag];
-    return [[nextResponderDictionary allKeys] count] > 0;
+//    NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+//    NSDictionary *nextResponderDictionary = [self _indexForNextResponderAtIndexPath:cellIndexPath withTag:textViewTag];
+//    return [[nextResponderDictionary allKeys] count] > 0;
+    
+    return YES;
 }
 
 
@@ -111,32 +110,11 @@
     return indexForNextResponder;
 }
 
--(void) _registerNextResponderViewTag:(NSNumber *) responderViewTag withIndexPath:(NSIndexPath *) indexPath
+-(void) _registerNextResponder:(id) responder forCell:(UITableViewCell *) cell
 {
-    NSMutableDictionary *responders = [self.textFieldResponders mutableCopy];
-    id textFieldRespoders = nil;
+    NSMutableDictionary *responders = self.textFieldResponders ? [self.textFieldResponders mutableCopy] : [NSMutableDictionary dictionaryWithCapacity:1];
     
-    if ([responders objectForKey:indexPath]) {
-        if ([[responders objectForKey:indexPath] isKindOfClass:[NSArray class]]) {
-            NSMutableArray *textRespondersForIndexPath = [responders objectForKey:indexPath];
-            [textRespondersForIndexPath addObject:responderViewTag];
-            textFieldRespoders = textRespondersForIndexPath;
-        } else
-        {
-            NSMutableArray *textRespondersForIndexPath = [[NSMutableArray alloc] initWithCapacity:2];
-            if ([responderViewTag isEqualToNumber:[responders objectForKey:indexPath]]) {
-                return;
-            }
-            [textRespondersForIndexPath addObject:[responders objectForKey:indexPath]];
-            [textRespondersForIndexPath addObject:responderViewTag];
-            textFieldRespoders = textRespondersForIndexPath;
-        }
-    } else
-    {
-        textFieldRespoders = responderViewTag;
-    }
-    
-    [responders setObject:textFieldRespoders forKey:indexPath];
+    [responders addEntriesFromDictionary:@{responder:cell}];
     
     self.textFieldResponders = responders;
 }

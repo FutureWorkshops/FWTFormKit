@@ -19,8 +19,8 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [self.textFieldResponderChainHandler nextResponderForCell:self textViewWithTag:textField.tag];
-    if (![self.textFieldResponderChainHandler haveNextResponderTextFieldWithTag:textField.tag inCell:self]) {
+    [self.textFieldResponderChainHandler nextResponderForCell:self];
+    if (![self.textFieldResponderChainHandler haveNextResponderForCell:self]) {
         [textField resignFirstResponder];
     }
     return NO;
@@ -37,7 +37,7 @@
     return YES;
 }
 
--(NSArray *)textFieldRespondersTags
+-(UITextField *)nextTextFieldResponder
 {
     NSAssert(NO, @"Override in subclass");
     return nil;

@@ -10,8 +10,10 @@
 
 @protocol FWTTextFieldResponderChainHandlerProtocol <NSObject>
 
-- (void) nextResponderForCell:(UITableViewCell *) cell textViewWithTag:(NSUInteger) textFieldTag;
-- (BOOL) haveNextResponderTextFieldWithTag:(NSUInteger) textViewTag inCell:(UITableViewCell *) cell;
-
+- (void) nextResponderForCell:(UITableViewCell *) cell;
+- (BOOL) haveNextResponderForCell:(UITableViewCell *) cell;
+- (void) registerNextRespondersInCell:(UITableViewCell *) cell;
+- (void) removeNextResponderForCell:(UITableViewCell *) cell;
+- (void) removeAllResponders;
 
 @end

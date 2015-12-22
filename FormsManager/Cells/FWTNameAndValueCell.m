@@ -120,10 +120,9 @@
 #pragma mark - FWTTextFieldResponderProtocol
 
 
--(NSArray *)textFieldRespondersTags
+-(UITextField *) nextTextFieldResponder
 {
-    self.valueTextField.tag = 100;
-    return @[[NSNumber numberWithInteger:self.valueTextField.tag]];
+    return self.valueTextField;
 }
 
 -(BOOL) _validateInput:(NSString *) string
