@@ -9,8 +9,7 @@
 #import "FWTFormsTableViewController.h"
 #import "FWTTextFieldResponderProtocol.h"
 
-@interface FWTFormsTableViewController (FWTTextFieldResponders) <FWTTextFieldResponderChainHandlerProtocol>
-
+@interface FWTFormsTableViewController (FWTTextFieldResponders) 
 
 -(void) registerTextRespondersInCell:(UITableViewCell *) cell withIndexPath:(NSIndexPath *) indexPath;
 -(void) removeTextResponderAtIndexPath:(NSIndexPath *) indexPath;
