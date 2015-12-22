@@ -90,6 +90,9 @@
 
         if ([self.inputErrorDelegate restricInputBaseOnValidationRuleForCell:self]) {
             if (![self _validateInput:replaced]) {
+                if (replaced.length < 1) {
+                    self.valueTextField.text = replaced;
+                }
                 return NO;
             } else
             {

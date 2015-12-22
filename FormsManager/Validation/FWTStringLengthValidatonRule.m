@@ -29,7 +29,7 @@
 {
     if ([value isKindOfClass:[NSString class]]) {
         NSString *stringValue  = value;
-        return (stringValue.length <= self.maxStringLength);
+        return (stringValue.length <= self.maxStringLength && stringValue.length > 0);
     }
     return NO;
 }
