@@ -7,14 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FWTTextFieldResponderChainHandlerProtocol.h"
+#import "FWTFormRespondersChainHadlerProtocol.h"
 
 @protocol FWTTextFieldResponderProtocol <NSObject>
 
 @required
-@property (nonatomic) id <FWTTextFieldResponderChainHandlerProtocol> textFieldResponderChainHandler;
-- (NSArray *) textFieldRespondersTags;
-- (BOOL) shoudRegisterAsTextResponder;
-
+@property (nonatomic) id <FWTFormRespondersChainHadlerProtocol> textFieldResponderChainHandler;
+- (UITextField *) nextTextFieldResponder;
 
 @end

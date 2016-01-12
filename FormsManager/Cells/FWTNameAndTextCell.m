@@ -68,10 +68,9 @@
 
 #pragma mark - FWTTextFieldResponderProtocol
 
--(NSArray *)textFieldRespondersTags
+-(UITextField *)nextTextFieldResponder
 {
-    self.textField.tag = 100;
-    return @[[NSNumber numberWithInteger:self.textField.tag]];
+    return self.textField;
 }
 
 
