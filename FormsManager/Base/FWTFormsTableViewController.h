@@ -16,7 +16,7 @@
 #import "FWTAuxiliaryRowProtocol.h"
 #import "FWTObserverDelegate.h"
 #import "FWTCellObserverManager.h"
-#import "FWTTextFieldResponderChainHandlerProtocol.h"
+#import "FWTFormRespondersChainHadlerProtocol.h"
 
 @interface FWTFormsTableViewController : UITableViewController <FWTCellObservableProtocol, FWTDynamicFormDatasourceProtocol, FWTFormDescriptionKeyProtocol>
 
@@ -25,7 +25,7 @@
 @property (nonatomic) NSDictionary *textFieldResponders; // all textField responders. Used when taped keyboard next button.
 @property (nonatomic) id<FWTAuxiliaryRowProtocol> auxiliaryRowsHandler; // hanlde behaviour of auxiliaryRows attached to cells in the form.
 @property (nonatomic) NSString *formDescriptionKey;
-@property (nonatomic) id <FWTTextFieldResponderChainHandlerProtocol> responderChainHandler;
+@property (nonatomic) id <FWTFormRespondersChainHadlerProtocol> responderChainHandler;
 
 @property (nonatomic, weak) id <FWTObserverDelegate> observerDelegate; // cell KVO observer. Respond to KVO messages from Observable Cells.
 @property (nonatomic) FWTCellObserverManager *observerManager;

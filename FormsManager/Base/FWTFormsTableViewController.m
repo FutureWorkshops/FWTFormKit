@@ -18,7 +18,7 @@
 #import "FWTTitle.h"
 #import "FWTSubtitle.h"
 #import "FWTNameAndSwitchCell.h"
-#import "FWTFormNextRespondersManager.h"
+#import "FWTFormNextTextRespondersHandler.h"
 
 #define kDefaultHeightForHeaderView 60.0
 #define kDefaultHeightForFooterView 60.0
@@ -124,10 +124,10 @@
     return _textFieldResponders;
 }
 
--(id<FWTTextFieldResponderChainHandlerProtocol>)responderChainHandler
+-(id<FWTFormRespondersChainHadlerProtocol>)responderChainHandler
 {
     if (!self->_responderChainHandler) {
-        self->_responderChainHandler = [[FWTFormNextRespondersManager alloc] initWithTableView:self.tableView];
+        self->_responderChainHandler = [[FWTFormNextTextRespondersHandler alloc] initWithTableView:self.tableView];
     }
     
     return self->_responderChainHandler;
@@ -257,8 +257,8 @@
     }
     
     if ([cell conformsToProtocol:@protocol(FWTTextFieldResponderProtocol)]) {
-        [self.responderChainHandler registerNextRespondersInCell:cell];
-        
+        UITableViewCell<FWTTextFieldResponderProtocol> *responderCell = (UITableViewCell <FWTTextFieldResponderProtocol> *) cell;
+        responderCell.textFieldResponderChainHandler = self.responderChainHandler;
     }
 }
 
@@ -284,10 +284,7 @@
 
 -(void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([cell conformsToProtocol:@protocol(FWTTextFieldResponderProtocol)]) {
-        [self.responderChainHandler removeNextResponderForCell:cell];
-        
-    }
+    
     [self.observerManager removeObserverForCell:cell atIndexPath:indexPath];
 }
 

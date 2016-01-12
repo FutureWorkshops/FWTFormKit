@@ -15,7 +15,7 @@
 
 @interface FWTTextInputCell : FWTFormCell <FWTTextFieldResponderProtocol>
 
-@property (nonatomic) id <FWTTextFieldResponderChainHandlerProtocol> textFieldResponderChainHandler;
+@property (nonatomic) id <FWTFormRespondersChainHadlerProtocol> textFieldResponderChainHandler;
 @property (nonatomic) id <FWTValidationProtocol> inputValidator;
 @property (nonatomic) id <FWTCellValidationErrorDelegate> inputErrorDelegate;
 

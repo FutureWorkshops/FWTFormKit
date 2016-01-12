@@ -19,10 +19,7 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [self.textFieldResponderChainHandler nextResponderForCell:self];
-    if (![self.textFieldResponderChainHandler haveNextResponderForCell:self]) {
-        [textField resignFirstResponder];
-    }
+    [self.textFieldResponderChainHandler selectNextResponderForCell:self];
     return NO;
 }
 
@@ -31,11 +28,6 @@
     textField.returnKeyType = UIReturnKeyNext;
 }
 
-
--(BOOL)shoudRegisterAsTextResponder
-{
-    return YES;
-}
 
 -(UITextField *)nextTextFieldResponder
 {

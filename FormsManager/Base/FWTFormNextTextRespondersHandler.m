@@ -7,6 +7,8 @@
 //
 
 #import "FWTFormNextTextRespondersHandler.h"
+#import "FWTTextFieldResponderProtocol.h"
+
 
 @interface FWTFormNextTextRespondersHandler ()
 
@@ -25,17 +27,29 @@
 }
 
 
--(void)selectNextResponderForCell:(UITableViewCell *)cell
+-(void) selectNextResponderForCell:(UITableViewCell *)cell
 {
     NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
     if (cellIndexPath) {
         for (int i=cellIndexPath.section; i < [self.tableView numberOfSections]; ++i) {
-            for (int j = cellIndexPath.row; j < [self.tableView numberOfRowsInSection:i]; ++j) {
-                
-                
+            for (int j = cellIndexPath.row + 1; j < [self.tableView numberOfRowsInSection:i]; ++j) {
+                UITableViewCell *nextFormCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:j inSection:i]];
+                if (nextFormCell) {
+                    if ([nextFormCell conformsToProtocol:@protocol(FWTTextFieldResponderProtocol)]) {
+                        UITableViewCell <FWTTextFieldResponderProtocol> *nextResponderCell = (UITableViewCell <FWTTextFieldResponderProtocol> *)nextFormCell;
+                        UITextField *nextResponderTextField = [nextResponderCell nextTextFieldResponder];
+                        if (nextResponderTextField) {
+                            [nextResponderTextField becomeFirstResponder];
+                            break;
+                        }
+                    }
+                }
             }
         }
     }
+    [cell endEditing:YES]; // of no next responder in the form- dismiss the keyboard.
 }
+
+
 
 @end
