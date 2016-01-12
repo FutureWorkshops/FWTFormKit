@@ -7,7 +7,6 @@
 //
 
 #import "FWTFormsTableViewController.h"
-//#import "FWTFormsTableViewController+FWTTextFieldResponders.h"
 #import "FWTTextFieldResponderProtocol.h"
 #import "FWTSectionHeaderView.h"
 #import "FWTPickerCell.h"
@@ -19,6 +18,7 @@
 #import "FWTSubtitle.h"
 #import "FWTNameAndSwitchCell.h"
 #import "FWTFormNextTextRespondersHandler.h"
+#import "FWTTextFieldResponderProtocol.h"
 
 #define kDefaultHeightForHeaderView 60.0
 #define kDefaultHeightForFooterView 60.0
@@ -228,6 +228,11 @@
     
     if ([cell conformsToProtocol:@protocol(FWTInputFormattableCell)]) {
         [cell performSelector:@selector(setInputFormatter:) withObject:cellConfiguration.inputFormatter];
+    }
+    
+    if ([cell conformsToProtocol:@protocol(FWTTextFieldResponderProtocol)]) {
+        UITableViewCell <FWTTextFieldResponderProtocol> *nextResponderCell = (UITableViewCell <FWTTextFieldResponderProtocol> *)cell;
+        [nextResponderCell nextTextFieldResponder].keyboardType = cellConfiguration.keybordType;
     }
     
     return cell;
