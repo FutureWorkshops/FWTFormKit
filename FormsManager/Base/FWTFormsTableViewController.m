@@ -282,6 +282,17 @@
         [self.auxiliaryRowsHandler displayInlineAuxiliaryRowForRowAtIndexPath:indexPath];
     }
     
+    UITableViewCell *nextFormCell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    if ([nextFormCell conformsToProtocol:@protocol(FWTTextFieldResponderProtocol)]) {
+        UITableViewCell <FWTTextFieldResponderProtocol> *nextResponderCell = (UITableViewCell <FWTTextFieldResponderProtocol> *)nextFormCell;
+        UITextField *nextResponderTextField = [nextResponderCell nextTextFieldResponder];
+        if (nextResponderTextField) {
+            [nextResponderTextField becomeFirstResponder];
+        }
+    }
+    
+    
     return indexPath;
 }
 
