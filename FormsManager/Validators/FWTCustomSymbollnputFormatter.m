@@ -34,6 +34,9 @@
     FWTCustomSymbollnputFormatter *inputFormatter  = [FWTCustomSymbollnputFormatter new];
     inputFormatter.numberFormatter = [NSNumberFormatter numberFormatterWithCustomSymbol:@""];
     inputFormatter.customSymbolBlock = block;
+    if (block) {
+        inputFormatter.numberFormatter.percentSymbol = block(nil);
+    }
     return inputFormatter;
 }
 
