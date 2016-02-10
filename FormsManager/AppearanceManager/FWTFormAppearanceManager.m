@@ -430,6 +430,9 @@
         cell.validationRules = cellDescription[FWTCellInputValidationRules];
         cell.inputValidator = [[FWTValidator alloc] initWithValidationRules:cell.validationRules];
     }
+    if (cellDescription[FWTCellInputKeyboardType]) {
+        cell.keybordType = [cellDescription[FWTCellInputKeyboardType] integerValue];
+    }
     
     return cell;
 }

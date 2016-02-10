@@ -21,7 +21,8 @@
 @property (nonatomic, unsafe_unretained) Class nextViewControllerClass;
 @property (nonatomic) NSString *dynamicCellKey;
 @property (nonatomic) NSString *placeholderText;
-@property (nonatomic) UIImage *accessoryViewImage;;
+@property (nonatomic) UIImage *accessoryViewImage;
+@property (nonatomic) UIKeyboardType keybordType;
 
 @property (nonatomic) BOOL isObservable;
 

@@ -7,7 +7,6 @@
 //
 
 #import "FWTFormsTableViewController.h"
-#import "FWTFormsTableViewController+FWTTextFieldResponders.h"
 #import "FWTTextFieldResponderProtocol.h"
 #import "FWTSectionHeaderView.h"
 #import "FWTPickerCell.h"
@@ -18,6 +17,8 @@
 #import "FWTTitle.h"
 #import "FWTSubtitle.h"
 #import "FWTNameAndSwitchCell.h"
+#import "FWTFormNextTextRespondersHandler.h"
+#import "FWTTextFieldResponderProtocol.h"
 
 #define kDefaultHeightForHeaderView 60.0
 #define kDefaultHeightForFooterView 60.0
@@ -123,6 +124,14 @@
     return _textFieldResponders;
 }
 
+-(id<FWTFormRespondersChainHadlerProtocol>)responderChainHandler
+{
+    if (!self->_responderChainHandler) {
+        self->_responderChainHandler = [[FWTFormNextTextRespondersHandler alloc] initWithTableView:self.tableView];
+    }
+    
+    return self->_responderChainHandler;
+}
 
 #pragma mark - Delegates
 #pragma mark
@@ -221,6 +230,11 @@
         [cell performSelector:@selector(setInputFormatter:) withObject:cellConfiguration.inputFormatter];
     }
     
+    if ([cell conformsToProtocol:@protocol(FWTTextFieldResponderProtocol)]) {
+        UITableViewCell <FWTTextFieldResponderProtocol> *nextResponderCell = (UITableViewCell <FWTTextFieldResponderProtocol> *)cell;
+        [nextResponderCell nextTextFieldResponder].keyboardType = cellConfiguration.keybordType;
+    }
+    
     return cell;
 }
 #pragma clang diagnostic pop
@@ -248,8 +262,8 @@
     }
     
     if ([cell conformsToProtocol:@protocol(FWTTextFieldResponderProtocol)]) {
-        [self registerTextRespondersInCell:cell withIndexPath:indexPath];
-        
+        UITableViewCell<FWTTextFieldResponderProtocol> *responderCell = (UITableViewCell <FWTTextFieldResponderProtocol> *) cell;
+        responderCell.textFieldResponderChainHandler = self.responderChainHandler;
     }
 }
 
@@ -268,6 +282,17 @@
         [self.auxiliaryRowsHandler displayInlineAuxiliaryRowForRowAtIndexPath:indexPath];
     }
     
+    UITableViewCell *nextFormCell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    if ([nextFormCell conformsToProtocol:@protocol(FWTTextFieldResponderProtocol)]) {
+        UITableViewCell <FWTTextFieldResponderProtocol> *nextResponderCell = (UITableViewCell <FWTTextFieldResponderProtocol> *)nextFormCell;
+        UITextField *nextResponderTextField = [nextResponderCell nextTextFieldResponder];
+        if (nextResponderTextField) {
+            [nextResponderTextField becomeFirstResponder];
+        }
+    }
+    
+    
     return indexPath;
 }
 
@@ -275,6 +300,7 @@
 
 -(void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     [self.observerManager removeObserverForCell:cell atIndexPath:indexPath];
 }
 

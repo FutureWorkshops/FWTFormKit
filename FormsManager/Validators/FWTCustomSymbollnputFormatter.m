@@ -13,7 +13,7 @@
 @interface FWTCustomSymbollnputFormatter ()
 
 @property (nonatomic) NSString *formattedString;
-
+@property (nonatomic, copy) FWTCustomSymbolBlock customSymbolBlock;
 @property (nonatomic) NSNumberFormatter *numberFormatter;
 
 @end
@@ -67,6 +67,7 @@
     NSString *replaced = [string stringByReplacingCharactersInRange:meaningNumberRange withString:character];
     NSNumber *replacedAmount = [self.numberFormatter numberFromString:replaced];
     
+    
     if (replacedAmount == nil) {
         //Probably non numeric character OR all meaningful digits were deleted.
         if (replaced.length < minimumTextLenght + 1) {
@@ -76,6 +77,10 @@
         }
         return NO;
     }
+    if (self.customSymbolBlock !=nil) {
+        self.numberFormatter.percentSymbol = self.customSymbolBlock(replacedAmount);
+    }
+    
     self.formattedString  = [self.numberFormatter stringFromNumber:replacedAmount];
 
     return YES;

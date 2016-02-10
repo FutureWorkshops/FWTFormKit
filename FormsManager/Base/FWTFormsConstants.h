@@ -36,6 +36,8 @@ FOUNDATION_EXPORT NSString * const FWTCellAccessoryViewImage;
 FOUNDATION_EXPORT NSString * const FWTCellIsObservable;
 FOUNDATION_EXPORT NSString * const FWTCellInputFormatter;
 FOUNDATION_EXPORT NSString * const FWTCellOutputFormatter;
+FOUNDATION_EXPORT NSString * const FWTCellInputKeyboardType;
+
 FOUNDATION_EXPORT NSString * const FWTCellInputValidationRules;
 
 

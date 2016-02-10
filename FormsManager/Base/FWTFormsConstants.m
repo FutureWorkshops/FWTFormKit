@@ -30,7 +30,7 @@ NSString * const FWTCellsConfigurationKey = @"FWTCellsConfigurationKey";
 NSString * const FWTHeaderCellConfigurationKey = @"FWTHeaderCellConfigurationKey";
 NSString * const FWTFooterCellConfigurationKey = @"FWTFooterCellConfigurationKey";
 NSString * const FWTCellAccessoryViewImage = @"FWTCellAccessoryViewImage";
-
+NSString * const FWTCellInputKeyboardType = @"FWTCellInputKeyboardType";
 
 
 // Dynamic Sections and Cells
