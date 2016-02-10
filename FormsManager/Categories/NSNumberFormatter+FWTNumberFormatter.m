@@ -103,7 +103,7 @@
     _numberFormatter.multiplier = @1;
     _numberFormatter.maximum = @10000;
     
-     _numberFormatter.percentSymbol = symbol;
+    _numberFormatter.percentSymbol = symbol;
     
     return _numberFormatter;
 }
