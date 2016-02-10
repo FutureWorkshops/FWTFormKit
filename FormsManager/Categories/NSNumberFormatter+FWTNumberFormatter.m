@@ -95,18 +95,13 @@
 +(instancetype) numberFormatterWithCustomSymbol:(NSString *) symbol
 {
     static NSNumberFormatter *_numberFormatter;
-    static dispatch_once_t onceToken;
     
-    dispatch_once(&onceToken, ^{
-        
-        _numberFormatter = [[NSNumberFormatter alloc] init];
-        [_numberFormatter setNumberStyle: NSNumberFormatterPercentStyle];
-        _numberFormatter.usesGroupingSeparator = NO;
-        [_numberFormatter setGeneratesDecimalNumbers:NO];
-        _numberFormatter.multiplier = @1;
-        _numberFormatter.maximum = @10000;
-        
-    });
+    _numberFormatter = [[NSNumberFormatter alloc] init];
+    [_numberFormatter setNumberStyle: NSNumberFormatterPercentStyle];
+    _numberFormatter.usesGroupingSeparator = NO;
+    [_numberFormatter setGeneratesDecimalNumbers:NO];
+    _numberFormatter.multiplier = @1;
+    _numberFormatter.maximum = @10000;
     
      _numberFormatter.percentSymbol = symbol;
     
