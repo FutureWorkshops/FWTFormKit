@@ -29,6 +29,18 @@
 }
 
 
++(instancetype) inputFormatterWithCustomSymbolBlock:(FWTCustomSymbolBlock) block
+{
+    FWTCustomSymbollnputFormatter *inputFormatter  = [FWTCustomSymbollnputFormatter new];
+    inputFormatter.numberFormatter = [NSNumberFormatter numberFormatterWithCustomSymbol:@""];
+    inputFormatter.customSymbolBlock = block;
+    if (block) {
+        inputFormatter.numberFormatter.percentSymbol = block(nil);
+    }
+    return inputFormatter;
+}
+
+
 +(instancetype) percentInputFormatterWithNumberFormatter:(NSNumberFormatter *) numberFormatter;
 {
     FWTCustomSymbollnputFormatter *inputFormatter  = [FWTCustomSymbollnputFormatter new];
