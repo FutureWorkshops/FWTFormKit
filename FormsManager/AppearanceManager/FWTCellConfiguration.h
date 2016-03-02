@@ -11,6 +11,9 @@
 #import "FWTInputFormatterWithNumberFormatterProtocol.h"
 #import "FWTCellValidationErrorDelegate.h"
 
+@protocol FWTOutputFormatter;
+
+
 @interface FWTCellConfiguration : NSObject
 
 @property (nonatomic) NSString *identifier;
@@ -34,7 +37,7 @@
 // Validation and Formatter
 
 @property (nonatomic) id <FWTInputFormatterWithNumberFormatterProtocol> inputFormatter;
-@property (nonatomic) NSNumberFormatter *outputFormatter;
+@property (nonatomic) id<FWTOutputFormatter> outputFormatter;
 
 @property (nonatomic) id inputValidator;
 @property (nonatomic) NSArray *validationRules;
