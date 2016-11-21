@@ -17,6 +17,7 @@
 @implementation FWTNameAndSwitchCell
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
 
     [self.switchSelector addTarget:self action:@selector(_KVOWorkAround:) forControlEvents:UIControlEventValueChanged];
 }

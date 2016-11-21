@@ -21,6 +21,8 @@
 @implementation FWTPickerCell
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
+    
     self.pickerview.dataSource = self;
     self.pickerview.delegate = self;
     self.startDate = NSNotFound;
